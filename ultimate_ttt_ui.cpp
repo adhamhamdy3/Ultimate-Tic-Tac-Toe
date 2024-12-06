@@ -42,6 +42,7 @@ void Ultimate_TTT_UI::getPlayersInfo(){
     QChar player1Symbol = getSymbol("X");
 
     players[0] = new Ultimate_TTT_Player<char>(player1Name.toStdString(), player1Symbol.toLatin1());
+    players[0]->setBoard(ultimateBoard);
 
     QMessageBox msgBox(this);
 
@@ -70,6 +71,8 @@ void Ultimate_TTT_UI::getPlayersInfo(){
         player2Symbol = getSymbol("O");
 
         players[1] = new Ultimate_TTT_Player<char>(player2Name.toStdString(), player2Symbol.toLatin1());
+        players[1]->setBoard(ultimateBoard);
+
     }
 
     // ui->name1Label->setText("Name: " + QString::fromStdString(players[0]->getname()));
@@ -139,7 +142,7 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if(i != ultimateBoard->currentBoard_X && ultimateBoard->currentBoard_Y)
+            if(i != ultimateBoard->currentBoard_X && j != ultimateBoard->currentBoard_Y)
                 turnOFF(i, j);
 
             else turnON(i, j);
@@ -175,20 +178,33 @@ void Ultimate_TTT_UI::isGameIsOver(){
     }
 }
 
-void Ultimate_TTT_UI::on__0_0_Grid_cellDoubleClicked(int row, int column)
-{
-    if(!ui->_0_0_Grid->isEnabled()) return;
+void Ultimate_TTT_UI::switchBoards(){
+    //if(ultimateBoard->isEmpty()) return void (QMessageBox::warning(this, "error", "-1 -1"));
 
-    QTableWidgetItem *item = ui->_0_0_Grid->item(row, column);
+    if(ultimateBoard->canPickBoard) turnON_ALL();
+
+    else keepCurrentBoard();
+}
+
+void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int& column, const int& board_X, const int& board_Y){
+
+    if(ultimateBoard->canPickBoard){
+        ultimateBoard->currentBoard_X = board_X;
+        ultimateBoard->currentBoard_Y = board_Y;
+        ultimateBoard->canPickBoard = false;
+    }
+
 
     if(player1){
         ultimateBoard->update_board(row, column, players[0]->getsymbol());
         updateCell(item, 0, row, column);
+        switchBoards();
     }
 
     else if(player2){
         ultimateBoard->update_board(row, column, players[1]->getsymbol());
         updateCell(item, 1, row, column);
+        switchBoards();
     }
 
     isGameIsOver();
@@ -207,5 +223,94 @@ void Ultimate_TTT_UI::on__0_0_Grid_cellDoubleClicked(int row, int column)
         nonHumanPlayerTurn(2000);
 
     updateNoOfMovesLabel();*/
+}
+
+void Ultimate_TTT_UI::on__0_0_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_0_0_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_0_0_Grid->item(row, column);
+
+    operate(item, row, column, 0, 0);
+}
+
+
+void Ultimate_TTT_UI::on__0_1_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_0_1_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_0_1_Grid->item(row, column);
+
+    operate(item, row, column, 0, 1);
+}
+
+
+void Ultimate_TTT_UI::on__0_2_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_0_2_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_0_2_Grid->item(row, column);
+
+    operate(item, row, column, 0, 2);
+}
+
+
+void Ultimate_TTT_UI::on__1_0_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_1_0_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_1_0_Grid->item(row, column);
+
+    operate(item, row, column, 1, 0);
+}
+
+
+void Ultimate_TTT_UI::on__1_1_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_1_1_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_1_1_Grid->item(row, column);
+
+    operate(item, row, column, 1, 1);
+}
+
+
+void Ultimate_TTT_UI::on__1_2_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_1_2_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_1_2_Grid->item(row, column);
+
+    operate(item, row, column, 1, 2);
+}
+
+
+void Ultimate_TTT_UI::on__2_0_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_2_0_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_2_0_Grid->item(row, column);
+
+    operate(item, row, column, 2, 0);
+}
+
+
+void Ultimate_TTT_UI::on__2_1_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_2_1_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_2_1_Grid->item(row, column);
+
+    operate(item, row, column, 2, 1);
+}
+
+
+void Ultimate_TTT_UI::on__2_2_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_2_2_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_2_2_Grid->item(row, column);
+
+    operate(item, row, column, 2, 2);
 }
 

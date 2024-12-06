@@ -23,6 +23,24 @@ public:
 private slots:
     void on__0_0_Grid_cellDoubleClicked(int row, int column);
 
+    void on__0_1_Grid_cellDoubleClicked(int row, int column);
+
+    void on__0_2_Grid_cellDoubleClicked(int row, int column);
+
+    void on__1_0_Grid_cellDoubleClicked(int row, int column);
+
+    void on__1_1_Grid_cellActivated(int row, int column);
+
+    void on__1_1_Grid_cellDoubleClicked(int row, int column);
+
+    void on__1_2_Grid_cellDoubleClicked(int row, int column);
+
+    void on__2_0_Grid_cellDoubleClicked(int row, int column);
+
+    void on__2_1_Grid_cellDoubleClicked(int row, int column);
+
+    void on__2_2_Grid_cellDoubleClicked(int row, int column);
+
 private:
     Ui::Ultimate_TTT_UI *ui;
     Player<char>* players[2];
@@ -48,5 +66,9 @@ private:
     void updateCell(QTableWidgetItem*, const int&, const int&, const int&);
 
     void isGameIsOver();
+
+    void switchBoards();
+
+    void operate(QTableWidgetItem*, const int&, const int&, const int&, const int&);
 };
 #endif // ULTIMATE_TTT_UI_H
