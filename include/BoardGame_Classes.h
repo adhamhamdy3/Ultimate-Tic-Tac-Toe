@@ -68,6 +68,9 @@ public:
     virtual void getmove(int& x, int& y) = 0;
 };
 
+class Ultimate_TTT_UI;
+
+
 template <typename T>
 class GameManager {
 private:
@@ -77,6 +80,9 @@ public:
     GameManager(Board<T>*, Player<T>* playerPtr[2]);
     ~GameManager();
     void run();
+
+    friend class Ultimate_TTT_UI;
+
 };
 
 
