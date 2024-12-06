@@ -52,6 +52,8 @@ private:
 
     bool gameOver;
 
+    bool firstTime;
+
     void getPlayersInfo();
 
     QChar getSymbol(const QString& defaultSymbol);

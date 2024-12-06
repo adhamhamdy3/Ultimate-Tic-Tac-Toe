@@ -131,16 +131,10 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            // Enable only the targeted grid
             if (i == ultimateBoard->currentBoard_X && j == ultimateBoard->currentBoard_Y) {
-                // Check if the grid is already won
-                if (ultimateBoard->localWinners[i][j] == ' ') {
-                    turnON_OFF(i, j, true);  // Enable the grid
-                } else {
-                    turnON_OFF(i, j, false);  // Disable if already won
-                }
+                    turnON_OFF(i, j, true);
             } else {
-                turnON_OFF(i, j, false);  // Disable other grids
+                turnON_OFF(i, j, false);
             }
         }
     }
@@ -174,42 +168,51 @@ void Ultimate_TTT_UI::isGameIsOver(){
 }
 
 void Ultimate_TTT_UI::switchBoards(){
-    //if(ultimateBoard->isEmpty()) return void (QMessageBox::warning(this, "error", "-1 -1"));
-
-    if(ultimateBoard->canPickBoard) turnON_ALL();
-
-    else keepCurrentBoard();
+    if (ultimateBoard->canPickBoard) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                turnON_OFF(i, j, ultimateBoard->localWinners[i][j] == ' ');
+            }
+        }
+    } else {
+        keepCurrentBoard();
+    }
 }
 
 void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int& column, const int& board_X, const int& board_Y){
+
+    // if(ultimateBoard->localWinners[row][column] != ' '){
+    //     ultimateBoard->canPickBoard = true;
+    //     switchBoards();
+    //     return;
+    // }
 
     if(ultimateBoard->canPickBoard){
         ultimateBoard->currentBoard_X = board_X;
         ultimateBoard->currentBoard_Y = board_Y;
         ultimateBoard->canPickBoard = false;
+        switchBoards();
     }
 
-    bool isEnabled = (ultimateBoard->localWinners[this->currentBoard_X][this->currentBoard_Y] == ' ');
-
-    if (!isEnabled){
-        canPickBoard = true;
+    bool moveValid;
+    if (player1) {
+        moveValid = ultimateBoard->update_board(row, column, players[0]->getsymbol());
+        if (moveValid) updateCell(item, 0, row, column);
+    } else if (player2) {
+        moveValid = ultimateBoard->update_board(row, column, players[1]->getsymbol());
+        if (moveValid) updateCell(item, 1, row, column);
     }
 
-    if(player1){
-        ultimateBoard->update_board(row, column, players[0]->getsymbol());
-        updateCell(item, 0, row, column);
+    if (!moveValid) {
+        QMessageBox::warning(this, "Invalid Move", "Move not allowed. Try again.");
+        return;
     }
-
-    else if(player2){
-        ultimateBoard->update_board(row, column, players[1]->getsymbol());
-        updateCell(item, 1, row, column);
-    }
-
-    switchBoards();
 
     isGameIsOver();
 
     if(gameOver) return void (turnOFF_ALL());
+
+    switchBoards();
 
     player1 ^= 1;
 

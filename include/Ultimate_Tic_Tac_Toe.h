@@ -214,24 +214,27 @@ void Ultimate_Board<T>::display_board() {
 
 template<typename T>
 bool Ultimate_Board<T>::update_board(const int &x, const int &y, const T &symbol) {
-    bool isEnabled = (this->localWinners[this->currentBoard_X][this->currentBoard_Y] == ' ');
+    // if (this->localWinners[this->currentBoard_X][this->currentBoard_Y] != ' '){
+    //     this->canPickBoard = true;
+    //     return false;
+    // }
 
-    if (!isEnabled){
-        canPickBoard = true;
-        return false;
-    }
+    bool moveMade = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
 
-    bool ret = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
-    if (ret){
-        if (this->boards[this->currentBoard_X][this->currentBoard_Y]->is_win()){
-            this->localWinners[this->currentBoard_X][this->currentBoard_Y] = this->boards[this->currentBoard_X][this->currentBoard_Y]->winner;
-            this->canPickBoard = true;
-        }
-        this->currentBoard_X = x;
-        this->currentBoard_Y = y;
-        this->n_moves++;
+    if(!moveMade) return false;
+
+    if (this->boards[this->currentBoard_X][this->currentBoard_Y]->is_win()){
+        this->localWinners[this->currentBoard_X][this->currentBoard_Y] = this->boards[this->currentBoard_X][this->currentBoard_Y]->winner;
     }
-    return ret;
+    this->currentBoard_X = x;
+    this->currentBoard_Y = y;
+
+    if(this->localWinners[this->currentBoard_X][this->currentBoard_Y] != ' ')
+        this->canPickBoard = true;
+
+    this->n_moves++;
+
+    return true;
 }
 
 template<typename T>
