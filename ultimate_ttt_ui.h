@@ -58,8 +58,7 @@ private:
 
     void keepCurrentBoard();
 
-    void turnON(const int&, const int&);
-    void turnOFF(const int&, const int&);
+    void turnON_OFF(const int&, const int&, bool);
     void turnON_ALL();
     void turnOFF_ALL();
 

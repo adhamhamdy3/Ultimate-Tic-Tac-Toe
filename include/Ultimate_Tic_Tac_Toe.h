@@ -137,7 +137,7 @@ public:
 
 template<typename T>
 bool Ultimate_Board<T>::isEmpty() const{
-    return currentBoard_X == -1 && currentBoard_Y == -1;
+    return this->currentBoard_X == -1 && this->currentBoard_Y == -1;
 }
 
 template<typename T>
@@ -194,20 +194,20 @@ void Ultimate_Board<T>::display_board() {
 
 template<typename T>
 bool Ultimate_Board<T>::update_board(const int &x, const int &y, const T &symbol) {
-    bool isEnabled = (this->localWinners[currentBoard_X][currentBoard_Y] == ' ');
+    bool isEnabled = (this->localWinners[this->currentBoard_X][this->currentBoard_Y] == ' ');
 
     if (!isEnabled){
         canPickBoard = true;
         return false;
     }
 
-    bool ret = this->boards[currentBoard_X][currentBoard_Y]->update_board(x, y, symbol);
+    bool ret = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
     if (ret){
-        if (this->boards[currentBoard_X][currentBoard_Y]->is_win()){
-            this->localWinners[x][y] = this->boards[currentBoard_X][currentBoard_Y]->winner;
+        if (this->boards[this->currentBoard_X][this->currentBoard_Y]->is_win()){
+            this->localWinners[x][y] = this->boards[this->currentBoard_X][this->currentBoard_Y]->winner;
         }
-        currentBoard_X = x;
-        currentBoard_Y = y;
+        this->currentBoard_X = x;
+        this->currentBoard_Y = y;
         if (this->boards)
         this->n_moves++;
     }

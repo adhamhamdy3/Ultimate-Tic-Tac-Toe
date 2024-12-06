@@ -96,35 +96,24 @@ QChar Ultimate_TTT_UI::getSymbol(const QString& defaultSymbol){
     return playerSymbol;
 }
 
-void Ultimate_TTT_UI::turnOFF(const int& i, const int& j){
-    if(i == 0 && j == 0) ui->_0_0_Grid->setEnabled(false);
-    if(i == 0 && j == 1) ui->_0_1_Grid->setEnabled(false);
-    if(i == 0 && j == 2) ui->_0_2_Grid->setEnabled(false);
-    if(i == 1 && j == 0) ui->_1_0_Grid->setEnabled(false);
-    if(i == 1 && j == 1) ui->_1_1_Grid->setEnabled(false);
-    if(i == 1 && j == 2) ui->_1_2_Grid->setEnabled(false);
-    if(i == 2 && j == 0) ui->_2_0_Grid->setEnabled(false);
-    if(i == 2 && j == 1) ui->_2_1_Grid->setEnabled(false);
-    if(i == 2 && j == 2) ui->_2_2_Grid->setEnabled(false);
+void Ultimate_TTT_UI::turnON_OFF(const int& i, const int& j, bool state){
+    if(i == 0 && j == 0) { ui->_0_0_Grid->setEnabled(state); }
+    else if(i == 0 && j == 1) { ui->_0_1_Grid->setEnabled(state); }
+    else if(i == 0 && j == 2) { ui->_0_2_Grid->setEnabled(state); }
+    else if(i == 1 && j == 0) { ui->_1_0_Grid->setEnabled(state); }
+    else if(i == 1 && j == 1) { ui->_1_1_Grid->setEnabled(state); }
+    else if(i == 1 && j == 2) { ui->_1_2_Grid->setEnabled(state); }
+    else if(i == 2 && j == 0) { ui->_2_0_Grid->setEnabled(state); }
+    else if(i == 2 && j == 1) { ui->_2_1_Grid->setEnabled(state); }
+    else if(i == 2 && j == 2) { ui->_2_2_Grid->setEnabled(state); }
 
 }
 
-void Ultimate_TTT_UI::turnON(const int& i, const int& j){
-    if(i == 0 && j == 0) ui->_0_0_Grid->setEnabled(true);
-    if(i == 0 && j == 1) ui->_0_1_Grid->setEnabled(true);
-    if(i == 0 && j == 2) ui->_0_2_Grid->setEnabled(true);
-    if(i == 1 && j == 0) ui->_1_0_Grid->setEnabled(true);
-    if(i == 1 && j == 1) ui->_1_1_Grid->setEnabled(true);
-    if(i == 1 && j == 2) ui->_1_2_Grid->setEnabled(true);
-    if(i == 2 && j == 0) ui->_2_0_Grid->setEnabled(true);
-    if(i == 2 && j == 1) ui->_2_1_Grid->setEnabled(true);
-    if(i == 2 && j == 2) ui->_2_2_Grid->setEnabled(true);
-}
 
 void Ultimate_TTT_UI::turnON_ALL(){
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            turnON(i, j);
+            turnON_OFF(i, j, true);
         }
     }
 }
@@ -132,7 +121,7 @@ void Ultimate_TTT_UI::turnON_ALL(){
 void Ultimate_TTT_UI::turnOFF_ALL(){
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            turnOFF(i, j);
+            turnON_OFF(i, j, false);
         }
     }
 }
@@ -142,10 +131,15 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if(i != ultimateBoard->currentBoard_X && j != ultimateBoard->currentBoard_Y)
-                turnOFF(i, j);
+            if (i == ultimateBoard->currentBoard_X && j == ultimateBoard->currentBoard_Y){
+                if(ultimateBoard->localWinners[i][j] != ' ')
+                    turnON_OFF(i, j, false);
 
-            else turnON(i, j);
+                else turnON_OFF(i, j, true);
+            }
+            else {
+                turnON_OFF(i, j, false);
+            }
         }
 
     }
