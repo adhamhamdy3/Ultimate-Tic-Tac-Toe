@@ -49,14 +49,24 @@ bool Local_Board<T>::is_win() {
     for (int i = 0; i < this->rows; i++) {
         if ((this->board[i][0] == this->board[i][1] && this->board[i][1] == this->board[i][2] && this->board[i][0] != ' ') ||
             (this->board[0][i] == this->board[1][i] && this->board[1][i] == this->board[2][i] && this->board[0][i] != ' ')) {
-            this->winner = this->board[i][0];
+            if(this->board[i][0] != ' '){
+                this->winner = this->board[i][0];
+            }
+            else {
+                this->winner = this->board[0][i];
+            }
             return true;
         }
     }
 
     if ((this->board[0][0] == this->board[1][1] && this->board[1][1] == this->board[2][2] && this->board[0][0] != ' ') ||
         (this->board[0][2] == this->board[1][1] && this->board[1][1] == this->board[2][0] && this->board[0][2] != ' ')) {
-        this->winner = this->board[0][0];
+        if(this->board[0][0] != ' '){
+            this->winner = this->board[0][0];
+        }
+        else {
+            this->winner = this->board[0][2];
+        }
         return true;
     }
 
@@ -152,7 +162,17 @@ void Ultimate_Board<T>::pickBoard() {
 
 template<typename T>
 bool Ultimate_Board<T>::is_draw() {
-    return this->n_moves == 81 && !(this->is_win());
+    bool draw = true;
+
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if(this->localWinners[i][j] == ' '){
+                draw = false;
+            }
+        }
+    }
+
+    return ((this->n_moves == 81 || draw) && !this->is_win());
 }
 
 template<typename T>
@@ -174,7 +194,7 @@ bool Ultimate_Board<T>::is_win() {
     if ((this->localWinners[0][0] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][2] && this->localWinners[0][0] != ' ') ||
         (this->localWinners[0][2] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][0] && this->localWinners[0][2] != ' ')) {
 
-        this->ultimateWinner = this->localWinners[0][0];
+        this->ultimateWinner = this->localWinners[1][1];
         return true;
     }
 
@@ -204,11 +224,11 @@ bool Ultimate_Board<T>::update_board(const int &x, const int &y, const T &symbol
     bool ret = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
     if (ret){
         if (this->boards[this->currentBoard_X][this->currentBoard_Y]->is_win()){
-            this->localWinners[x][y] = this->boards[this->currentBoard_X][this->currentBoard_Y]->winner;
+            this->localWinners[this->currentBoard_X][this->currentBoard_Y] = this->boards[this->currentBoard_X][this->currentBoard_Y]->winner;
+            this->canPickBoard = true;
         }
         this->currentBoard_X = x;
         this->currentBoard_Y = y;
-        if (this->boards)
         this->n_moves++;
     }
     return ret;

@@ -127,21 +127,22 @@ void Ultimate_TTT_UI::turnOFF_ALL(){
 }
 
 void Ultimate_TTT_UI::keepCurrentBoard(){
-    if(ultimateBoard->currentBoard_X == -1 || ultimateBoard->currentBoard_Y == -1) return;
+    if (ultimateBoard->currentBoard_X == -1 || ultimateBoard->currentBoard_Y == -1) return;
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if (i == ultimateBoard->currentBoard_X && j == ultimateBoard->currentBoard_Y){
-                if(ultimateBoard->localWinners[i][j] != ' ')
-                    turnON_OFF(i, j, false);
-
-                else turnON_OFF(i, j, true);
-            }
-            else {
-                turnON_OFF(i, j, false);
+            // Enable only the targeted grid
+            if (i == ultimateBoard->currentBoard_X && j == ultimateBoard->currentBoard_Y) {
+                // Check if the grid is already won
+                if (ultimateBoard->localWinners[i][j] == ' ') {
+                    turnON_OFF(i, j, true);  // Enable the grid
+                } else {
+                    turnON_OFF(i, j, false);  // Disable if already won
+                }
+            } else {
+                turnON_OFF(i, j, false);  // Disable other grids
             }
         }
-
     }
 }
 
@@ -188,18 +189,23 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
         ultimateBoard->canPickBoard = false;
     }
 
+    bool isEnabled = (ultimateBoard->localWinners[this->currentBoard_X][this->currentBoard_Y] == ' ');
+
+    if (!isEnabled){
+        canPickBoard = true;
+    }
 
     if(player1){
         ultimateBoard->update_board(row, column, players[0]->getsymbol());
         updateCell(item, 0, row, column);
-        switchBoards();
     }
 
     else if(player2){
         ultimateBoard->update_board(row, column, players[1]->getsymbol());
         updateCell(item, 1, row, column);
-        switchBoards();
     }
+
+    switchBoards();
 
     isGameIsOver();
 
