@@ -132,7 +132,13 @@ public:
     bool is_draw() override;
     bool game_is_over() override;
     void pickBoard();
+    bool isEmpty() const;
 };
+
+template<typename T>
+bool Ultimate_Board<T>::isEmpty() const{
+    return currentBoard_X == -1 && currentBoard_Y == -1;
+}
 
 template<typename T>
 void Ultimate_Board<T>::pickBoard() {

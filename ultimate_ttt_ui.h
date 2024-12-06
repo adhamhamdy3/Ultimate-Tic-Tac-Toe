@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "BoardGame_Classes.h"
 #include "Ultimate_Tic_Tac_Toe.h"
+#include <QTableWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +20,9 @@ public:
     Ultimate_TTT_UI(QWidget *parent = nullptr);
     ~Ultimate_TTT_UI();
 
+private slots:
+    void on__0_0_Grid_cellDoubleClicked(int row, int column);
+
 private:
     Ui::Ultimate_TTT_UI *ui;
     Player<char>* players[2];
@@ -28,12 +32,21 @@ private:
 private:
     bool player1, player2;
 
+    bool gameOver;
+
     void getPlayersInfo();
 
     QChar getSymbol(const QString& defaultSymbol);
 
-    void toggleLocalBoards();
+    void keepCurrentBoard();
 
-    void toggle(const int&, const int&);
+    void turnON(const int&, const int&);
+    void turnOFF(const int&, const int&);
+    void turnON_ALL();
+    void turnOFF_ALL();
+
+    void updateCell(QTableWidgetItem*, const int&, const int&, const int&);
+
+    void isGameIsOver();
 };
 #endif // ULTIMATE_TTT_UI_H

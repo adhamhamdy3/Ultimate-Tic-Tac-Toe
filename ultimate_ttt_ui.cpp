@@ -13,6 +13,8 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     player1 = true;
     player2 = false;
 
+    gameOver = false;
+
     ultimateBoard = new Ultimate_Board<char>();
 
     getPlayersInfo();
@@ -91,7 +93,7 @@ QChar Ultimate_TTT_UI::getSymbol(const QString& defaultSymbol){
     return playerSymbol;
 }
 
-void Ultimate_TTT_UI::toggle(const int& i, const int& j){
+void Ultimate_TTT_UI::turnOFF(const int& i, const int& j){
     if(i == 0 && j == 0) ui->_0_0_Grid->setEnabled(false);
     if(i == 0 && j == 1) ui->_0_1_Grid->setEnabled(false);
     if(i == 0 && j == 2) ui->_0_2_Grid->setEnabled(false);
@@ -104,16 +106,106 @@ void Ultimate_TTT_UI::toggle(const int& i, const int& j){
 
 }
 
-void Ultimate_TTT_UI::toggleLocalBoards(){
+void Ultimate_TTT_UI::turnON(const int& i, const int& j){
+    if(i == 0 && j == 0) ui->_0_0_Grid->setEnabled(true);
+    if(i == 0 && j == 1) ui->_0_1_Grid->setEnabled(true);
+    if(i == 0 && j == 2) ui->_0_2_Grid->setEnabled(true);
+    if(i == 1 && j == 0) ui->_1_0_Grid->setEnabled(true);
+    if(i == 1 && j == 1) ui->_1_1_Grid->setEnabled(true);
+    if(i == 1 && j == 2) ui->_1_2_Grid->setEnabled(true);
+    if(i == 2 && j == 0) ui->_2_0_Grid->setEnabled(true);
+    if(i == 2 && j == 1) ui->_2_1_Grid->setEnabled(true);
+    if(i == 2 && j == 2) ui->_2_2_Grid->setEnabled(true);
+}
+
+void Ultimate_TTT_UI::turnON_ALL(){
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            turnON(i, j);
+        }
+    }
+}
+
+void Ultimate_TTT_UI::turnOFF_ALL(){
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            turnOFF(i, j);
+        }
+    }
+}
+
+void Ultimate_TTT_UI::keepCurrentBoard(){
     if(ultimateBoard->currentBoard_X == -1 || ultimateBoard->currentBoard_Y == -1) return;
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             if(i != ultimateBoard->currentBoard_X && ultimateBoard->currentBoard_Y)
-                toggle(i, j);
+                turnOFF(i, j);
+
+            else turnON(i, j);
         }
 
     }
 }
 
+void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex, const int& row, const int& column){
+    item->setText(QString::fromStdString(std::string(1, players[playerIndex]->getsymbol())));
+    item->setTextAlignment(Qt::AlignCenter);
+    item->setFont(QFont("Outrun future", 30, QFont::Bold));
+
+    if(!playerIndex) item->setBackground(Qt::blue);
+    else item->setBackground(Qt::red);
+
+    item->setForeground(Qt::white);
+    item->setFlags(Qt::NoItemFlags);
+
+}
+
+void Ultimate_TTT_UI::isGameIsOver(){
+    if (ultimateBoard->game_is_over()) {
+        if (ultimateBoard->is_win()) {
+            if (player1)
+                QMessageBox::information(this, "Win!", QString::fromStdString(players[0]->getname()) + " has won.");
+            else
+                QMessageBox::information(this, "Win!", QString::fromStdString(players[1]->getname()) + " has won.");
+        } else if (ultimateBoard->is_draw()) {
+            QMessageBox::information(this, "Draw!", "The match ended with a draw.");
+        }
+        gameOver = true;
+    }
+}
+
+void Ultimate_TTT_UI::on__0_0_Grid_cellDoubleClicked(int row, int column)
+{
+    if(!ui->_0_0_Grid->isEnabled()) return;
+
+    QTableWidgetItem *item = ui->_0_0_Grid->item(row, column);
+
+    if(player1){
+        ultimateBoard->update_board(row, column, players[0]->getsymbol());
+        updateCell(item, 0, row, column);
+    }
+
+    else if(player2){
+        ultimateBoard->update_board(row, column, players[1]->getsymbol());
+        updateCell(item, 1, row, column);
+    }
+
+    isGameIsOver();
+
+    if(gameOver) return void (turnOFF_ALL());
+
+    player1 ^= 1;
+
+    player2 ^= 1;
+
+    // updateState();
+
+    /*if(!nonHumanPlayerMode) player2 ^= 1;
+
+    if(nonHumanPlayerMode)
+        nonHumanPlayerTurn(2000);
+
+    updateNoOfMovesLabel();*/
+}
 

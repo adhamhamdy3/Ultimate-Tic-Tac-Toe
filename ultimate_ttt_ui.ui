@@ -66,7 +66,7 @@
      <string>Number of Moves = </string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>11</x>
@@ -135,38 +135,90 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
+          </property>
+         </item>
+         <item row="2" column="1">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="2" column="2">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
          </item>
         </widget>
@@ -228,46 +280,100 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -331,46 +437,100 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -445,46 +605,100 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -548,6 +762,12 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="foreground">
            <brush brushstyle="NoBrush">
             <color alpha="255">
@@ -562,16 +782,34 @@
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -580,26 +818,53 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -666,6 +931,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -673,6 +941,9 @@
          <item row="0" column="1">
           <property name="text">
            <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
@@ -682,6 +953,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -689,6 +963,9 @@
          <item row="1" column="0">
           <property name="text">
            <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
@@ -698,6 +975,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -705,6 +985,9 @@
          <item row="1" column="2">
           <property name="text">
            <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
@@ -714,6 +997,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -722,6 +1008,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -729,6 +1018,9 @@
          <item row="2" column="2">
           <property name="text">
            <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
@@ -801,8 +1093,54 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
+          </property>
+         </item>
+         <item row="0" column="1">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="1" column="0">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="1" column="1">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="1" column="2">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="2" column="0">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="2" column="1">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
+         </item>
+         <item row="2" column="2">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
          </item>
         </widget>
@@ -864,16 +1202,34 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -881,6 +1237,9 @@
          <item row="1" column="0">
           <property name="text">
            <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
@@ -890,26 +1249,53 @@
           <property name="text">
            <string/>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
@@ -973,43 +1359,96 @@
           </property>
          </column>
          <item row="0" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="1" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="0">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
           </property>
          </item>
          <item row="2" column="1">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
           <property name="flags">
            <set>ItemIsEnabled</set>
+          </property>
+         </item>
+         <item row="2" column="2">
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
          </item>
         </widget>
@@ -1032,7 +1471,7 @@
      <x>0</x>
      <y>0</y>
      <width>1174</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
