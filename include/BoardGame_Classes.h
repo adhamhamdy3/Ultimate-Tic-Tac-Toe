@@ -4,6 +4,8 @@
 #include <string>
 using namespace std;
 
+class Ultimate_TTT_UI;
+
 template <typename T>
 class Board {
 protected:
@@ -30,6 +32,8 @@ public:
     virtual bool game_is_over() = 0;
 
     //virtual void resetBoard() = 0;
+
+    friend class Ultimate_TTT_UI;
 };
 
 template <typename T>

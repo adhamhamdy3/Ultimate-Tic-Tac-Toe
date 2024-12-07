@@ -71,5 +71,11 @@ private:
     void switchBoards();
 
     void operate(QTableWidgetItem*, const int&, const int&, const int&, const int&);
+
+    void updateNoOfMovesLabel() const;
+
+    void updateGridWinner(int gridX, int gridY, int playerIndex);
+
+    QTableWidget* getGridPtr(const int& i, const int& j);
 };
 #endif // ULTIMATE_TTT_UI_H

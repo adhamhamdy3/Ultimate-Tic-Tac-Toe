@@ -214,11 +214,6 @@ void Ultimate_Board<T>::display_board() {
 
 template<typename T>
 bool Ultimate_Board<T>::update_board(const int &x, const int &y, const T &symbol) {
-    // if (this->localWinners[this->currentBoard_X][this->currentBoard_Y] != ' '){
-    //     this->canPickBoard = true;
-    //     return false;
-    // }
-
     bool moveMade = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
 
     if(!moveMade) return false;

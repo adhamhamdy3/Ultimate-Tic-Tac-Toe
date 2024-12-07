@@ -106,7 +106,6 @@ void Ultimate_TTT_UI::turnON_OFF(const int& i, const int& j, bool state){
     else if(i == 2 && j == 0) { ui->_2_0_Grid->setEnabled(state); }
     else if(i == 2 && j == 1) { ui->_2_1_Grid->setEnabled(state); }
     else if(i == 2 && j == 2) { ui->_2_2_Grid->setEnabled(state); }
-
 }
 
 
@@ -181,31 +180,29 @@ void Ultimate_TTT_UI::switchBoards(){
 
 void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int& column, const int& board_X, const int& board_Y){
 
-    // if(ultimateBoard->localWinners[row][column] != ' '){
-    //     ultimateBoard->canPickBoard = true;
-    //     switchBoards();
-    //     return;
-    // }
-
     if(ultimateBoard->canPickBoard){
         ultimateBoard->currentBoard_X = board_X;
         ultimateBoard->currentBoard_Y = board_Y;
-        ultimateBoard->canPickBoard = false;
         switchBoards();
+        ultimateBoard->canPickBoard = false;
     }
 
-    bool moveValid;
+    int recentBoard_X = ultimateBoard->currentBoard_X;
+    int recentBoard_Y = ultimateBoard->currentBoard_Y;
+    int pIndx;
+
     if (player1) {
-        moveValid = ultimateBoard->update_board(row, column, players[0]->getsymbol());
-        if (moveValid) updateCell(item, 0, row, column);
+        ultimateBoard->update_board(row, column, players[0]->getsymbol());
+        updateCell(item, 0, row, column);
+        pIndx = 0;
     } else if (player2) {
-        moveValid = ultimateBoard->update_board(row, column, players[1]->getsymbol());
-        if (moveValid) updateCell(item, 1, row, column);
+        ultimateBoard->update_board(row, column, players[1]->getsymbol());
+        updateCell(item, 1, row, column);
+        pIndx = 1;
     }
 
-    if (!moveValid) {
-        QMessageBox::warning(this, "Invalid Move", "Move not allowed. Try again.");
-        return;
+    if(ultimateBoard->boards[recentBoard_X][recentBoard_Y]->winner != ' '){
+        updateGridWinner(board_X, board_Y, pIndx);
     }
 
     isGameIsOver();
@@ -223,9 +220,9 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
     /*if(!nonHumanPlayerMode) player2 ^= 1;
 
     if(nonHumanPlayerMode)
-        nonHumanPlayerTurn(2000);
+        nonHumanPlayerTurn(2000);*/
 
-    updateNoOfMovesLabel();*/
+    updateNoOfMovesLabel();
 }
 
 void Ultimate_TTT_UI::on__0_0_Grid_cellDoubleClicked(int row, int column)
@@ -315,5 +312,36 @@ void Ultimate_TTT_UI::on__2_2_Grid_cellDoubleClicked(int row, int column)
     QTableWidgetItem *item = ui->_2_2_Grid->item(row, column);
 
     operate(item, row, column, 2, 2);
+}
+
+void Ultimate_TTT_UI::updateNoOfMovesLabel() const{
+    ui->noOfMoves_Label->setText("NUMBER OF MOVES = " +
+                                 QString::fromStdString(std::to_string(ultimateBoard->n_moves)));
+
+}
+
+void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
+    QLabel* label = nullptr;
+
+    if (gridX == 0 && gridY == 0) label = ui->_0_0_Label;
+    else if (gridX == 0 && gridY == 1) label = ui->_0_1_Label;
+    else if (gridX == 0 && gridY == 2) label = ui->_0_2_Label;
+    else if (gridX == 1 && gridY == 0) label = ui->_1_0_Label;
+    else if (gridX == 1 && gridY == 1) label = ui->_1_1_Label;
+    else if (gridX == 1 && gridY == 2) label = ui->_1_2_Label;
+    else if (gridX == 2 && gridY == 0) label = ui->_2_0_Label;
+    else if (gridX == 2 && gridY == 1) label = ui->_2_1_Label;
+    else if (gridX == 2 && gridY == 2) label = ui->_2_2_Label;
+
+    if (label) {
+        label->setText(QString(players[playerIndex]->getsymbol()));
+        label->setFont(QFont("Outrun future", 100, QFont::Bold));
+        label->setAlignment(Qt::AlignCenter);
+        if(!playerIndex) label->setStyleSheet("background-color: blue; color: white;");
+        else label->setStyleSheet("background-color: red; color: white;");
+
+        label->raise();
+        label->show();
+    }
 }
 
