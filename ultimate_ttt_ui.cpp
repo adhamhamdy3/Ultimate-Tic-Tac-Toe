@@ -337,11 +337,27 @@ void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
         label->setText(QString(players[playerIndex]->getsymbol()));
         label->setFont(QFont("Outrun future", 100, QFont::Bold));
         label->setAlignment(Qt::AlignCenter);
-        if(!playerIndex) label->setStyleSheet("background-color: blue; color: white;");
-        else label->setStyleSheet("background-color: red; color: white;");
+
+        QString baseStyle = QString(
+                                "QLabel { "
+                                "    background-color: %1; "
+                                "    color: white; "
+                                "    border-radius: 10px; "
+                                "    transition: all 0.3s ease; "
+                                "} "
+                                "QLabel:hover { "
+                                "    background-color: rgba(0, 0, 0, 0); "
+                                "    color: rgba(255, 255, 255, 0.8); "
+                                "    transform: scale(1.1); "
+                                "}")
+                                .arg(playerIndex == 0 ? "blue" : "red");
+
+        label->setStyleSheet(baseStyle);
 
         label->raise();
         label->show();
     }
 }
+
+
 
