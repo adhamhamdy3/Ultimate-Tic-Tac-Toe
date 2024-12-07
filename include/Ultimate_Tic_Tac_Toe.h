@@ -177,7 +177,7 @@ bool Ultimate_Board<T>::is_draw() {
         }
     }
 
-    return ((this->n_moves == 81 || draw) && !this->is_win());
+    return ((this->n_moves == 81) || (!this->is_win() && draw));
 }
 
 template<typename T>
