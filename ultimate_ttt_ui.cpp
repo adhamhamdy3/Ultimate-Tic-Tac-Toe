@@ -41,8 +41,7 @@ void Ultimate_TTT_UI::getPlayersInfo(){
 
     QChar player1Symbol = getSymbol("X");
 
-    players[0] = new Ultimate_TTT_Player<char>(player1Name.toStdString(), player1Symbol.toLatin1());
-    players[0]->setBoard(ultimateBoard);
+    players[0] = new Ultimate_TTT_Player<char>(player1Name.toStdString(), player1Symbol.toLatin1(), ultimateBoard);
 
     QMessageBox msgBox(this);
 
@@ -70,9 +69,7 @@ void Ultimate_TTT_UI::getPlayersInfo(){
 
         player2Symbol = getSymbol("O");
 
-        players[1] = new Ultimate_TTT_Player<char>(player2Name.toStdString(), player2Symbol.toLatin1());
-        players[1]->setBoard(ultimateBoard);
-
+        players[1] = new Ultimate_TTT_Player<char>(player2Name.toStdString(), player2Symbol.toLatin1(), ultimateBoard);
     }
 
     // ui->name1Label->setText("Name: " + QString::fromStdString(players[0]->getname()));
@@ -131,7 +128,7 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             if (i == ultimateBoard->currentBoard_X && j == ultimateBoard->currentBoard_Y) {
-                    turnON_OFF(i, j, true);
+                turnON_OFF(i, j, true);
             } else {
                 turnON_OFF(i, j, false);
             }
@@ -170,7 +167,7 @@ void Ultimate_TTT_UI::switchBoards(){
     if (ultimateBoard->canPickBoard) {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                turnON_OFF(i, j, ultimateBoard->localWinners[i][j] == ' ');
+                turnON_OFF(i, j, (ultimateBoard->localWinners[i][j] == ' '));
             }
         }
     } else {
@@ -358,6 +355,5 @@ void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
         label->show();
     }
 }
-
 
 

@@ -3,8 +3,6 @@
 
 #include "BoardGame_Classes.h"
 #include <iomanip>
-#include <map>
-#include <utility>
 
 template<typename T>
 class Local_Board : public Board<T> {
@@ -19,8 +17,8 @@ public:
     bool is_win() override;
     bool is_draw() override;
     bool game_is_over() override;
-//    void cleanUp();
-//    void resetBoard() override;
+    //    void cleanUp();
+    //    void resetBoard() override;
 };
 
 template<typename T>
@@ -146,7 +144,7 @@ public:
     bool is_win() override;
     bool is_draw() override;
     bool game_is_over() override;
-    void pickBoard();
+    bool pickBoard(int, int);
     bool isEmpty() const;
 };
 
@@ -156,13 +154,14 @@ bool Ultimate_Board<T>::isEmpty() const{
 }
 
 template<typename T>
-void Ultimate_Board<T>::pickBoard() {
-    cout << "Enter your board coordinates (x, y)" << endl;
-    int x, y;
-    cin >> x >> y;
-    this->currentBoard_X = x;
-    this->currentBoard_Y = y;
+bool Ultimate_Board<T>::pickBoard(int board_X, int board_Y) {
+    if(this->boards[board_X][board_Y]->game_is_over()){
+        return false;
+    }
+    this->currentBoard_X = board_X;
+    this->currentBoard_Y = board_Y;
     this->canPickBoard = false;
+    return true;
 }
 
 template<typename T>
@@ -269,31 +268,77 @@ Ultimate_Board<T>::Ultimate_Board() {
 template<typename T>
 class Ultimate_TTT_Player : public Player<T>{
 public:
-    Ultimate_TTT_Player(const string& name, const T& s);
+    Ultimate_Board<T>* ultimateBoardPtr;
+    Ultimate_TTT_Player(const string& name, const T& s, Ultimate_Board<T>*);
     void getmove(int &x, int &y) override;
 };
 
 template<typename T>
 void Ultimate_TTT_Player<T>::getmove(int &x, int &y) {
-    auto* ultimateBoard = dynamic_cast<Ultimate_Board<T>*>(this->boardPtr);
-    if (ultimateBoard) {
-        if (ultimateBoard->canPickBoard) {
+
+    if (this->ultimateBoardPtr->canPickBoard) {
+        cout << "You can pick any local board you want to pick a cell from." << endl;
+        int x, y;
+        cin >> x >> y;
+        while (!this->ultimateBoardPtr->pickBoard(x, y)){
             cout << "You can pick any local board you want to pick a cell from." << endl;
-            ultimateBoard->pickBoard();
-        } else {
-            cout << "You are allowed to pick from local board at coordinates ("
-                 << ultimateBoard->currentBoard_X << ", " << ultimateBoard->currentBoard_Y << ") only.";
+            cin >> x >> y;
         }
     } else {
-        cout << "Error: Board is not an Ultimate Board.\n";
-        return;
+        cout << "You are allowed to pick from local board at coordinates ("
+             << this->ultimateBoardPtr->currentBoard_X << ", " << this->ultimateBoardPtr->currentBoard_Y << ") only.";
+        cout << "\nPlease enter your move x and y (0 to 2) separated by spaces: ";
+        cin >> x >> y;
     }
-    cout << "\nPlease enter your move x and y (0 to 2) separated by spaces: ";
-    cin >> x >> y;
+
 }
 
 
 template<typename T>
-Ultimate_TTT_Player<T>::Ultimate_TTT_Player(const string &name, const T &s) : Player<T>(name, s) {}
+Ultimate_TTT_Player<T>::Ultimate_TTT_Player(const string &name, const T &s, Ultimate_Board<T>* ultimateBoardPtr) : Player<T>(name, s) {
+    this->boardPtr = nullptr;
+    this->ultimateBoardPtr = ultimateBoardPtr;
+}
+/*===================================================================================================================*/
+
+template<typename T>
+class Ultimate_TTT_Random_Player : public RandomPlayer<T>{
+private:
+    Ultimate_Board<T>* ultimateBoardPtr;
+public:
+    Ultimate_TTT_Random_Player(const T& symbol, Ultimate_Board<T>* ultimateBoardPtr);
+    void getmove(int& x, int& y) override;
+};
+
+template<typename T>
+void Ultimate_TTT_Random_Player<T>::getmove(int &x, int &y) {
+    x = rand() % this->dimension;
+    y = rand() % this->dimension;
+
+    int boardX, boardY;
+
+    if(this->ultimateBoardPtr->canPickBoard){
+        boardX = rand() % this->dimension;
+        boardY = rand() % this->dimension;
+
+        while (!this->ultimateBoardPtr->pickBoard(boardX, boardY)){
+            boardX = rand() % this->dimension;
+            boardY = rand() % this->dimension;
+        }
+    }
+}
+
+template<typename T>
+Ultimate_TTT_Random_Player<T>::Ultimate_TTT_Random_Player(const T &symbol, Ultimate_Board<T> *ultimateBoardPtr)
+    : RandomPlayer<T>(symbol) {
+    this->dimension = 3;
+    this->name = "Random Computer Player";
+    srand(static_cast<unsigned int>(time(0)));
+
+    this->boardPtr = nullptr;
+
+    this->ultimateBoardPtr = ultimateBoardPtr;
+}
+
 
 #endif //ULTIMATE_TIC_TAC_TOE_H
