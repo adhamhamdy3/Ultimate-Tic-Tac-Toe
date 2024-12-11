@@ -374,10 +374,12 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     int x, y, board_X, board_Y;
     players[1]->getmove(x, y);
+    board_X = ultimateBoard->currentBoard_X; board_Y = ultimateBoard->currentBoard_Y;
+
 
     while(!ultimateBoard->update_board(x, y, players[1]->getsymbol())){
         players[1]->getmove(x, y);
-        board_X = ultimateBoard->currentBoard_X, board_Y = ultimateBoard->currentBoard_Y;
+        board_X = ultimateBoard->currentBoard_X; board_Y = ultimateBoard->currentBoard_Y;
     }
 
     QTableWidgetItem *item = UI_grids[board_X][board_Y]->item(x, y);
@@ -399,8 +401,9 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
     updateNoOfMovesLabel();
 }
 
+
 void Ultimate_TTT_UI::nonHumanPlayerTurn(const int &delay){
-    //turnOFF_ALL();
+    turnOFF_ALL();
     QTimer::singleShot(delay, this, &Ultimate_TTT_UI::executeNonHumanPlayerTurn);
 }
 
