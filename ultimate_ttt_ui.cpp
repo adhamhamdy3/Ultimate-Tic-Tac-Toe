@@ -3,6 +3,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QTimer>
 
 Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     : QMainWindow(parent)
@@ -15,9 +16,35 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 
     gameOver = false;
 
+    nonHumanPlayerMode = false;
+
     ultimateBoard = new Ultimate_Board<char>();
 
     getPlayersInfo();
+
+    // Initialize UI_labels
+    UI_labels[0][0] = ui->_0_0_Label;
+    UI_labels[0][1] = ui->_0_1_Label;
+    UI_labels[0][2] = ui->_0_2_Label;
+    UI_labels[1][0] = ui->_1_0_Label;
+    UI_labels[1][1] = ui->_1_1_Label;
+    UI_labels[1][2] = ui->_1_2_Label;
+    UI_labels[2][0] = ui->_2_0_Label;
+    UI_labels[2][1] = ui->_2_1_Label;
+    UI_labels[2][2] = ui->_2_2_Label;
+
+    // Initialize UI_grids
+    UI_grids[0][0] = ui->_0_0_Grid;
+    UI_grids[0][1] = ui->_0_1_Grid;
+    UI_grids[0][2] = ui->_0_2_Grid;
+    UI_grids[1][0] = ui->_1_0_Grid;
+    UI_grids[1][1] = ui->_1_1_Grid;
+    UI_grids[1][2] = ui->_1_2_Grid;
+    UI_grids[2][0] = ui->_2_0_Grid;
+    UI_grids[2][1] = ui->_2_1_Grid;
+    UI_grids[2][2] = ui->_2_2_Grid;
+
+
 
     //ULTIMATE_TTT_GAME = new GameManager<char>(ultimateBoard, players);
 
@@ -47,7 +74,7 @@ void Ultimate_TTT_UI::getPlayersInfo(){
 
     msgBox.setText("Choose your opponent type:");
     // QPushButton* aiButton = msgBox.addButton("AI Player", QMessageBox::ActionRole);
-    // QPushButton* randomButton = msgBox.addButton("Random Computer Player", QMessageBox::ActionRole);
+    QPushButton* randomButton = msgBox.addButton("Random Computer Player", QMessageBox::ActionRole);
     QPushButton* realButton = msgBox.addButton("Real Player", QMessageBox::ActionRole);
 
     msgBox.exec();
@@ -59,11 +86,11 @@ void Ultimate_TTT_UI::getPlayersInfo(){
         players[1] = new P_TTT_AI_Player<char>(player2Symbol.toLatin1());
         players[1]->setBoard(Board);
         nonHumanPlayerMode = true;
-    } else if (msgBox.clickedButton() == randomButton) {
+    } else*/ if (msgBox.clickedButton() == randomButton) {
         player2Symbol = getSymbol("O");
-        players[1] = new P_TTT_Random_Player<char>(player2Symbol.toLatin1());
+        players[1] = new Ultimate_TTT_Random_Player<char>(player2Symbol.toLatin1(), ultimateBoard);
         nonHumanPlayerMode = true;
-    } else */if (msgBox.clickedButton() == realButton) {
+    } else if (msgBox.clickedButton() == realButton) {
         QString player2Name = QInputDialog::getText(this, "Player 2 Name", "Enter Player 2 name:", QLineEdit::Normal, "Player 2");
         if (player2Name.isEmpty()) player2Name = "Player 2";
 
@@ -94,15 +121,7 @@ QChar Ultimate_TTT_UI::getSymbol(const QString& defaultSymbol){
 }
 
 void Ultimate_TTT_UI::turnON_OFF(const int& i, const int& j, bool state){
-    if(i == 0 && j == 0) { ui->_0_0_Grid->setEnabled(state); }
-    else if(i == 0 && j == 1) { ui->_0_1_Grid->setEnabled(state); }
-    else if(i == 0 && j == 2) { ui->_0_2_Grid->setEnabled(state); }
-    else if(i == 1 && j == 0) { ui->_1_0_Grid->setEnabled(state); }
-    else if(i == 1 && j == 1) { ui->_1_1_Grid->setEnabled(state); }
-    else if(i == 1 && j == 2) { ui->_1_2_Grid->setEnabled(state); }
-    else if(i == 2 && j == 0) { ui->_2_0_Grid->setEnabled(state); }
-    else if(i == 2 && j == 1) { ui->_2_1_Grid->setEnabled(state); }
-    else if(i == 2 && j == 2) { ui->_2_2_Grid->setEnabled(state); }
+    UI_grids[i][j]->setEnabled(state);
 }
 
 
@@ -210,14 +229,14 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
 
     player1 ^= 1;
 
-    player2 ^= 1;
+    //player2 ^= 1;
 
     // updateState();
 
-    /*if(!nonHumanPlayerMode) player2 ^= 1;
+    if(!nonHumanPlayerMode) player2 ^= 1;
 
     if(nonHumanPlayerMode)
-        nonHumanPlayerTurn(2000);*/
+        nonHumanPlayerTurn(2000);
 
     updateNoOfMovesLabel();
 }
@@ -320,15 +339,7 @@ void Ultimate_TTT_UI::updateNoOfMovesLabel() const{
 void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
     QLabel* label = nullptr;
 
-    if (gridX == 0 && gridY == 0) label = ui->_0_0_Label;
-    else if (gridX == 0 && gridY == 1) label = ui->_0_1_Label;
-    else if (gridX == 0 && gridY == 2) label = ui->_0_2_Label;
-    else if (gridX == 1 && gridY == 0) label = ui->_1_0_Label;
-    else if (gridX == 1 && gridY == 1) label = ui->_1_1_Label;
-    else if (gridX == 1 && gridY == 2) label = ui->_1_2_Label;
-    else if (gridX == 2 && gridY == 0) label = ui->_2_0_Label;
-    else if (gridX == 2 && gridY == 1) label = ui->_2_1_Label;
-    else if (gridX == 2 && gridY == 2) label = ui->_2_2_Label;
+    label = UI_labels[gridX][gridY];
 
     if (label) {
         label->setText(QString(players[playerIndex]->getsymbol()));
@@ -356,4 +367,39 @@ void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
     }
 }
 
+
+void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
+
+    player1 = false;
+
+    int x, y, board_X, board_Y;
+    players[1]->getmove(x, y);
+
+    while(!ultimateBoard->update_board(x, y, players[1]->getsymbol())){
+        players[1]->getmove(x, y);
+        board_X = ultimateBoard->currentBoard_X, board_Y = ultimateBoard->currentBoard_Y;
+    }
+
+    QTableWidgetItem *item = UI_grids[board_X][board_Y]->item(x, y);
+
+    updateCell(item, 1, x, y);
+
+    isGameIsOver();
+
+    player1 = true;
+
+    //updateState();
+
+    if(gameOver){
+        turnOFF_ALL();
+        return;
+    }
+
+    switchBoards();
+}
+
+void Ultimate_TTT_UI::nonHumanPlayerTurn(const int &delay){
+    turnOFF_ALL();
+    QTimer::singleShot(delay, this, &Ultimate_TTT_UI::executeNonHumanPlayerTurn);
+}
 

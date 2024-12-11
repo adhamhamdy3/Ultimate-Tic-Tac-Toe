@@ -5,6 +5,7 @@
 #include "BoardGame_Classes.h"
 #include "Ultimate_Tic_Tac_Toe.h"
 #include <QTableWidgetItem>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,9 +49,14 @@ private:
     //GameManager<char>* ULTIMATE_TTT_GAME;
 
 private:
+    QLabel* UI_labels[3][3];
+    QTableWidget* UI_grids[3][3];
+
     bool player1, player2;
 
     bool gameOver;
+
+    bool nonHumanPlayerMode;
 
     bool firstTime;
 
@@ -77,5 +83,9 @@ private:
     void updateGridWinner(int gridX, int gridY, int playerIndex);
 
     QTableWidget* getGridPtr(const int& i, const int& j);
+
+    void nonHumanPlayerTurn(const int&);
+
+    void executeNonHumanPlayerTurn();
 };
 #endif // ULTIMATE_TTT_UI_H
