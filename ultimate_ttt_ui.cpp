@@ -396,10 +396,11 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
     }
 
     switchBoards();
+    updateNoOfMovesLabel();
 }
 
 void Ultimate_TTT_UI::nonHumanPlayerTurn(const int &delay){
-    turnOFF_ALL();
+    //turnOFF_ALL();
     QTimer::singleShot(delay, this, &Ultimate_TTT_UI::executeNonHumanPlayerTurn);
 }
 

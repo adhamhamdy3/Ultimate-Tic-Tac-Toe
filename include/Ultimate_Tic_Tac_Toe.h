@@ -17,8 +17,8 @@ public:
     bool is_win() override;
     bool is_draw() override;
     bool game_is_over() override;
-    //    void cleanUp();
-    //    void resetBoard() override;
+    void cleanUp();
+    void resetBoard();
 };
 
 template<typename T>
