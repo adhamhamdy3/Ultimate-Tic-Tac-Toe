@@ -70,7 +70,7 @@ private:
     void turnON_ALL();
     void turnOFF_ALL();
 
-    void updateCell(QTableWidgetItem*, const int&, const int&, const int&);
+    void updateCell(QTableWidgetItem*, const int&, const int&, const int&, const int&, const int&);
 
     void isGameIsOver();
 

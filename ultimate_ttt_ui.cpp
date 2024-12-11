@@ -155,7 +155,7 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
     }
 }
 
-void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex, const int& row, const int& column){
+void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex, const int& board_X, const int& board_Y, const int& row, const int& column){
     item->setText(QString::fromStdString(std::string(1, players[playerIndex]->getsymbol())));
     item->setTextAlignment(Qt::AlignCenter);
     item->setFont(QFont("Outrun future", 30, QFont::Bold));
@@ -166,6 +166,18 @@ void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex,
     item->setForeground(Qt::white);
     item->setFlags(Qt::NoItemFlags);
 
+    QWidget* cellWidget = UI_grids[board_X][board_Y]->cellWidget(row, column);
+
+    if (!cellWidget) {
+        cellWidget = new QWidget();
+        UI_grids[board_X][board_Y]->setCellWidget(row, column, cellWidget);
+    }
+
+    cellWidget->setStyleSheet("border: 3px solid yellow;");
+
+    QTimer::singleShot(1000, [cellWidget]() {
+        cellWidget->setStyleSheet("");
+    });
 }
 
 void Ultimate_TTT_UI::isGameIsOver(){
@@ -209,11 +221,11 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
 
     if (player1) {
         ultimateBoard->update_board(row, column, players[0]->getsymbol());
-        updateCell(item, 0, row, column);
+        updateCell(item, 0, board_X, board_Y, row, column);
         pIndx = 0;
     } else if (player2) {
         ultimateBoard->update_board(row, column, players[1]->getsymbol());
-        updateCell(item, 1, row, column);
+        updateCell(item, 1, board_X, board_Y, row, column);
         pIndx = 1;
     }
 
@@ -384,7 +396,7 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     QTableWidgetItem *item = UI_grids[board_X][board_Y]->item(x, y);
 
-    updateCell(item, 1, x, y);
+    updateCell(item, 1, board_X, board_Y, x, y);
 
     isGameIsOver();
 
