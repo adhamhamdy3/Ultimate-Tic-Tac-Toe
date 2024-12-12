@@ -175,7 +175,7 @@ void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex,
 
     cellWidget->setStyleSheet("border: 3px solid yellow;");
 
-    QTimer::singleShot(1000, [cellWidget]() {
+    QTimer::singleShot(500, [cellWidget]() {
         cellWidget->setStyleSheet("");
     });
 }
@@ -248,7 +248,7 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
     if(!nonHumanPlayerMode) player2 ^= 1;
 
     if(nonHumanPlayerMode)
-        nonHumanPlayerTurn(2000);
+        nonHumanPlayerTurn(1000);
 
     updateNoOfMovesLabel();
 }
@@ -397,6 +397,14 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
     QTableWidgetItem *item = UI_grids[board_X][board_Y]->item(x, y);
 
     updateCell(item, 1, board_X, board_Y, x, y);
+
+    // if(ultimateBoard->boards[board_X][board_X]->winner != ' '){
+    //     updateGridWinner(board_X, board_Y, 1);
+    // }
+
+    if(ultimateBoard->boards[board_X][board_Y]->winner != ' '){
+        updateGridWinner(board_X, board_Y, 1);
+    }
 
     isGameIsOver();
 
