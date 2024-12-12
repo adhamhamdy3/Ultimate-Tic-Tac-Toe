@@ -315,18 +315,16 @@ void Ultimate_TTT_Random_Player<T>::getmove(int &x, int &y) {
     x = rand() % this->dimension;
     y = rand() % this->dimension;
 
-    int boardX, boardY;
+    int boardX = -1, boardY = -1;
 
-    if(this->ultimateBoardPtr->canPickBoard){
-        boardX = rand() % this->dimension;
-        boardY = rand() % this->dimension;
-
-        while (!this->ultimateBoardPtr->pickBoard(boardX, boardY)){
+    if (this->ultimateBoardPtr->canPickBoard) {
+        do {
             boardX = rand() % this->dimension;
             boardY = rand() % this->dimension;
-        }
+        } while (!this->ultimateBoardPtr->pickBoard(boardX, boardY));
     }
 }
+
 
 template<typename T>
 Ultimate_TTT_Random_Player<T>::Ultimate_TTT_Random_Player(const T &symbol, Ultimate_Board<T> *ultimateBoardPtr)
