@@ -45,10 +45,19 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     UI_grids[2][2] = ui->_2_2_Grid;
 
 
+    UI_labels[0][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[0][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[0][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[1][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[1][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[1][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[2][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[2][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    UI_labels[2][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     //ULTIMATE_TTT_GAME = new GameManager<char>(ultimateBoard, players);
 
-    // updateNoOfMoves();
+    updateNoOfMovesLabel();
 }
 
 Ultimate_TTT_UI::~Ultimate_TTT_UI()
@@ -99,11 +108,11 @@ void Ultimate_TTT_UI::getPlayersInfo(){
         players[1] = new Ultimate_TTT_Player<char>(player2Name.toStdString(), player2Symbol.toLatin1(), ultimateBoard);
     }
 
-    // ui->name1Label->setText("Name: " + QString::fromStdString(players[0]->getname()));
-    // ui->mark1Label->setText("Mark: " + QString::fromStdString(string(1, players[0]->getsymbol())));
+    ui->name1_Label->setText("Name: " + QString::fromStdString(players[0]->getname()));
+    ui->mark1_Label->setText("Mark: " + QString::fromStdString(string(1, players[0]->getsymbol())));
 
-    // ui->name2label->setText("Name: " + QString::fromStdString(players[1]->getname()));
-    // ui->mark2Label->setText("Mark: " + QString::fromStdString(string(1, players[1]->getsymbol())));
+    ui->name2_Label->setText("Name: " + QString::fromStdString(players[1]->getname()));
+    ui->mark2_Label->setText("Mark: " + QString::fromStdString(string(1, players[1]->getsymbol())));
 }
 
 QChar Ultimate_TTT_UI::getSymbol(const QString& defaultSymbol){
@@ -194,6 +203,32 @@ void Ultimate_TTT_UI::isGameIsOver(){
     }
 }
 
+
+void Ultimate_TTT_UI::updateState(){
+    if(player1){
+        ui->state2_Label->setText("State: Waiting...");
+        ui->state1_Label->setText("State: YOUR TURN!");
+    }
+    else{
+        ui->state1_Label->setText("State: Waiting...");
+        ui->state2_Label->setText("State: YOUR TURN!");
+    }
+
+    if(ultimateBoard->canPickBoard){
+        ui->msgLabel->setText("You are able to choose any Tic Tac Toe grid to pick your cell.");
+        ui->msgLabel->setFont(QFont("Outrun future", 10, QFont::Bold));
+    }
+
+    else{
+        QString X = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_X));
+        QString Y = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_Y));
+        ui->msgLabel->setText("You can only choose (" + X + ", " + Y + ") Tic Tac Toe grid.");
+        ui->msgLabel->setFont(QFont("Outrun future", 14, QFont::Bold));
+
+    }
+}
+
+
 void Ultimate_TTT_UI::switchBoards(){
     if (ultimateBoard->canPickBoard) {
         for (int i = 0; i < 3; ++i) {
@@ -241,9 +276,7 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
 
     player1 ^= 1;
 
-    //player2 ^= 1;
-
-    // updateState();
+    updateState();
 
     if(!nonHumanPlayerMode) player2 ^= 1;
 
@@ -349,35 +382,34 @@ void Ultimate_TTT_UI::updateNoOfMovesLabel() const{
 }
 
 void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
-    QLabel* label = nullptr;
+    QLabel* label = UI_labels[gridX][gridY];
 
-    label = UI_labels[gridX][gridY];
+    if (!label) return;
 
-    if (label) {
-        label->setText(QString(players[playerIndex]->getsymbol()));
-        label->setFont(QFont("Outrun future", 100, QFont::Bold));
-        label->setAlignment(Qt::AlignCenter);
+    label->setText(QString(players[playerIndex]->getsymbol()));
+    label->setFont(QFont("Outrun future", 100, QFont::Bold));
+    label->setAlignment(Qt::AlignCenter);
 
-        QString baseStyle = QString(
-                                "QLabel { "
-                                "    background-color: %1; "
-                                "    color: white; "
-                                "    border-radius: 10px; "
-                                "    transition: all 0.3s ease; "
-                                "} "
-                                "QLabel:hover { "
-                                "    background-color: rgba(0, 0, 0, 0); "
-                                "    color: rgba(255, 255, 255, 0.8); "
-                                "    transform: scale(1.1); "
-                                "}")
-                                .arg(playerIndex == 0 ? "blue" : "red");
+    QString baseStyle = QString(
+                            "QLabel { "
+                            "    background-color: %1; "
+                            "    color: white; "
+                            "    border-radius: 10px; "
+                            "} "
+                            "QLabel:hover { "
+                            "    background-color: rgba(0, 0, 0, 0); "
+                            "    color: rgba(255, 255, 255, 0.8); "
+                            "    transform: scale(1.1); "
+                            "}")
+                            .arg(playerIndex == 0 ? "blue" : "red");
 
-        label->setStyleSheet(baseStyle);
+    label->setStyleSheet(baseStyle);
 
-        label->raise();
-        label->show();
-    }
+    label->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    label->raise();
+    label->show();
 }
+
 
 
 void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
@@ -398,10 +430,6 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     updateCell(item, 1, board_X, board_Y, x, y);
 
-    // if(ultimateBoard->boards[board_X][board_X]->winner != ' '){
-    //     updateGridWinner(board_X, board_Y, 1);
-    // }
-
     if(ultimateBoard->boards[board_X][board_Y]->winner != ' '){
         updateGridWinner(board_X, board_Y, 1);
     }
@@ -410,7 +438,7 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     player1 = true;
 
-    //updateState();
+    updateState();
 
     if(gameOver){
         turnOFF_ALL();

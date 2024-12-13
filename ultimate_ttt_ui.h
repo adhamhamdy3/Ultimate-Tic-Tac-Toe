@@ -80,6 +80,8 @@ private:
 
     void updateNoOfMovesLabel() const;
 
+    void updateState();
+
     void updateGridWinner(int gridX, int gridY, int playerIndex);
 
     QTableWidget* getGridPtr(const int& i, const int& j);
