@@ -19,6 +19,7 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     nonHumanPlayerMode = false;
 
     ultimateBoard = new Ultimate_Board<char>();
+    players[0] = players[1] = nullptr;
 
     getPlayersInfo();
 
@@ -198,6 +199,9 @@ void Ultimate_TTT_UI::initGrids(){
             UI_grids[i][j]->clearContents();
             UI_grids[i][j]->setEditTriggers(QAbstractItemView::NoEditTriggers);
             UI_grids[i][j]->setSelectionMode(QAbstractItemView::NoSelection);
+
+            // disconnect(UI_grids[i][j], nullptr, nullptr, nullptr);
+
         }
     }
 
@@ -210,6 +214,7 @@ void Ultimate_TTT_UI::initGrids(){
         }
 
     }
+    turnON_ALL();
 }
 
 
