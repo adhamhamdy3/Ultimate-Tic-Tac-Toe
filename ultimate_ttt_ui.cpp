@@ -202,14 +202,17 @@ void Ultimate_TTT_UI::initGrids(){
 
             for (int row = 0; row < 3; ++row) {
                 for (int column = 0; column < 3; ++column) {
-                    QTableWidgetItem* cell = new QTableWidgetItem();
+                    QTableWidgetItem* cell = UI_grids[i][j]->item(row, column);
+
+                    if (!cell) {
+                        cell = new QTableWidgetItem();
+                        UI_grids[i][j]->setItem(row, column, cell);
+                    }
 
                     cell->setText("");
                     cell->setTextAlignment(Qt::AlignCenter);
                     cell->setFont(QFont("Outrun future", 30, QFont::Bold));
                     cell->setFlags(Qt::ItemIsEnabled);
-
-                    UI_grids[i][j]->setItem(row, column, cell);
                 }
             }
 
