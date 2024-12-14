@@ -14,7 +14,7 @@ public:
     T winner;
     Local_Board();
     ~Local_Board();
-    bool update_board(const int& x, const int& y, const T& symbol) override;
+    bool update_board( int x,  int y, T symbol) override;
     void display_board() override;
     bool is_win() override;
     bool is_draw() override;
@@ -104,7 +104,7 @@ void Local_Board<T>::display_board() {
 }
 
 template<typename T>
-bool Local_Board<T>::update_board(const int& x, const int& y, const T& symbol) {
+bool Local_Board<T>::update_board(int x,  int y, T symbol) {
     if (!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == ' ' || symbol == ' ')) {
         if (symbol == ' ') {
             this->n_moves--;
@@ -153,7 +153,7 @@ public:
     Ultimate_Board();
     ~Ultimate_Board();
     bool canPickBoard;
-    bool update_board(const int& x, const int& y, const T& symbol) override;
+    bool update_board(int x, int y, T symbol) override;
     void display_board() override;
     bool is_win() override;
     bool is_draw() override;
@@ -253,7 +253,7 @@ void Ultimate_Board<T>::display_board() {
 
 
 template<typename T>
-bool Ultimate_Board<T>::update_board(const int& x, const int& y, const T& symbol) {
+bool Ultimate_Board<T>::update_board( int x,  int y,  T symbol) {
     bool moveMade = this->boards[this->currentBoard_X][this->currentBoard_Y]->update_board(x, y, symbol);
 
     if (!moveMade) return false;
