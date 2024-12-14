@@ -76,6 +76,8 @@ private:
 
     void switchBoards();
 
+    void playAgain();
+
     void operate(QTableWidgetItem*, const int&, const int&, const int&, const int&);
 
     void updateNoOfMovesLabel() const;
@@ -89,5 +91,7 @@ private:
     void nonHumanPlayerTurn(const int&);
 
     void executeNonHumanPlayerTurn();
+
+    void initGrids();
 };
 #endif // ULTIMATE_TTT_UI_H

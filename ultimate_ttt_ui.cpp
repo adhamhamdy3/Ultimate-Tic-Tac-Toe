@@ -72,6 +72,9 @@ Ultimate_TTT_UI::~Ultimate_TTT_UI()
 }
 
 void Ultimate_TTT_UI::getPlayersInfo(){
+    if (players[0]) delete players[0];
+    if (players[1]) delete players[1];
+
     QString player1Name = QInputDialog::getText(this, "Player 1 Name", "Enter Player 1 name:", QLineEdit::Normal, "Player 1");
     if(player1Name.isEmpty()) player1Name = "Player1";
 
@@ -189,17 +192,72 @@ void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex,
     });
 }
 
+void Ultimate_TTT_UI::initGrids(){
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            UI_grids[i][j]->clearContents();
+            UI_grids[i][j]->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            UI_grids[i][j]->setSelectionMode(QAbstractItemView::NoSelection);
+        }
+    }
+
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            UI_labels[i][j]->clear();
+            UI_labels[i][j]->setStyleSheet("");
+            UI_labels[i][j]->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+            UI_labels[i][j]->lower();
+        }
+
+    }
+}
+
+
+void Ultimate_TTT_UI::playAgain(){
+    ultimateBoard->resetUltimateBoard();
+
+    player1 = true, player2 = false, gameOver = false;
+    nonHumanPlayerMode = false;
+
+    getPlayersInfo();
+
+    initGrids();
+
+    updateNoOfMovesLabel();
+
+    updateState();
+}
+
 void Ultimate_TTT_UI::isGameIsOver(){
     if (ultimateBoard->game_is_over()) {
+        QString msg;
         if (ultimateBoard->is_win()) {
             if (player1)
-                QMessageBox::information(this, "Win!", QString::fromStdString(players[0]->getname()) + " has won.");
+                msg = QString::fromStdString(players[0]->getname() + " has won.");
             else
-                QMessageBox::information(this, "Win!", QString::fromStdString(players[1]->getname()) + " has won.");
+                msg = QString::fromStdString(players[1]->getname() + " has won.");
         } else if (ultimateBoard->is_draw()) {
-            QMessageBox::information(this, "Draw!", "The match ended with a draw.");
+            msg = "The match ended with a draw.";
         }
-        gameOver = true;
+
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle("Game Over!");
+        msgBox.setText(msg);
+        msgBox.setIcon(QMessageBox::Information);
+
+        QPushButton* playAgainButton = msgBox.addButton("Play Again", QMessageBox::AcceptRole);
+        QPushButton* quitButton = msgBox.addButton("Quit", QMessageBox::RejectRole);
+
+
+        msgBox.exec();
+
+        if(msgBox.clickedButton() == playAgainButton){
+            playAgain();
+        } else if (msgBox.clickedButton() == quitButton) {
+            QApplication::quit();
+        } else if (msgBox.clickedButton() == nullptr){
+            gameOver = true;
+        }
     }
 }
 
@@ -233,7 +291,7 @@ void Ultimate_TTT_UI::switchBoards(){
     if (ultimateBoard->canPickBoard) {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                turnON_OFF(i, j, (ultimateBoard->localWinners[i][j] == ' '));
+                turnON_OFF(i, j, (ultimateBoard->localWinners[i][j] == Local_Board<char>::DEFAULT_EMPTY_VALUE));
             }
         }
     } else {
@@ -264,7 +322,7 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
         pIndx = 1;
     }
 
-    if(ultimateBoard->boards[recentBoard_X][recentBoard_Y]->winner != ' '){
+    if(ultimateBoard->boards[recentBoard_X][recentBoard_Y]->winner != Local_Board<char>::DEFAULT_EMPTY_VALUE){
         updateGridWinner(board_X, board_Y, pIndx);
     }
 
@@ -430,7 +488,7 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     updateCell(item, 1, board_X, board_Y, x, y);
 
-    if(ultimateBoard->boards[board_X][board_Y]->winner != ' '){
+    if(ultimateBoard->boards[board_X][board_Y]->winner != Local_Board<char>::DEFAULT_EMPTY_VALUE){
         updateGridWinner(board_X, board_Y, 1);
     }
 
