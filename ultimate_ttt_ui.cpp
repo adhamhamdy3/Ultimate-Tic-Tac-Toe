@@ -200,7 +200,18 @@ void Ultimate_TTT_UI::initGrids(){
             UI_grids[i][j]->setEditTriggers(QAbstractItemView::NoEditTriggers);
             UI_grids[i][j]->setSelectionMode(QAbstractItemView::NoSelection);
 
-            // disconnect(UI_grids[i][j], nullptr, nullptr, nullptr);
+            for (int row = 0; row < 3; ++row) {
+                for (int column = 0; column < 3; ++column) {
+                    QTableWidgetItem* cell = new QTableWidgetItem();
+
+                    cell->setText("");
+                    cell->setTextAlignment(Qt::AlignCenter);
+                    cell->setFont(QFont("Outrun future", 30, QFont::Bold));
+                    cell->setFlags(Qt::ItemIsEnabled);
+
+                    UI_grids[i][j]->setItem(row, column, cell);
+                }
+            }
 
         }
     }
