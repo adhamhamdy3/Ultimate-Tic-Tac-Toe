@@ -11,6 +11,8 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setStyleSheet("background-color: #263238; color: #ECEFF1");
+
     player1 = true;
     player2 = false;
 
@@ -46,15 +48,17 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     UI_grids[2][2] = ui->_2_2_Grid;
 
 
-    UI_labels[0][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[0][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[0][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[1][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[1][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[1][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[2][0]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[2][1]->setAttribute(Qt::WA_TransparentForMouseEvents);
-    UI_labels[2][2]->setAttribute(Qt::WA_TransparentForMouseEvents);
+    for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+            UI_grids[row][col]->setStyleSheet("background-color: #37474F; "
+                                              "gridline-color: #546E7A; "
+                                              "border: 1px solid #546E7A;");
+
+            UI_labels[row][col]->setAttribute(Qt::WA_TransparentForMouseEvents);
+            UI_labels[row][col]->lower();
+        }
+
+    }
 
     //ULTIMATE_TTT_GAME = new GameManager<char>(ultimateBoard, players);
 
