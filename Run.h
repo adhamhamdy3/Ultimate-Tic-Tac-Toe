@@ -95,11 +95,11 @@ void RunConnect4() {
         cout << "2. Random Computer\n";
         cin >> choice;
         if (choice == "1") {
-            new Connect4_Player<char>(player1Name, 'X');
+            players[0]= new Connect4_Player<char>(player1Name, 'X');
             break;
         }
         else if (choice == "2") {
-            new Connect4_Random_Player<char>('X');
+            players[0] = new Connect4_Random_Player<char>('X');
             break;
         }
         else
@@ -108,23 +108,19 @@ void RunConnect4() {
     }
 
 
-
     cout << "Enter Player 2 name: ";
     cin >> player2Name;
-    cout << "Choose Player 2 type:\n";
-    cout << "1. Human\n";
-    cout << "2. Random Computer\n";
     while (true) {
         cout << "Choose Player 1 type:\n";
         cout << "1. Human\n";
         cout << "2. Random Computer\n";
         cin >> choice;
         if (choice == "1") {
-            new Connect4_Player<char>(player2Name, 'O');
+            players[1] = new Connect4_Player<char>(player2Name, 'O');
             break;
         }
         else if (choice == "2") {
-            new Connect4_Random_Player<char>('O');
+            players[1] = new Connect4_Random_Player<char>('O');
             break;
         }
         else
@@ -221,7 +217,7 @@ void RunGame3() {
         cout << "Choose Player X type:\n";
         cout << "1. Human\n";
         cout << "2. Random Computer\n";
-        cout << "3. Smart computer\n";
+        //cout << "3. Smart computer\n";
         cin >> choice;
 
         if (choice == "1") {
