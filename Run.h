@@ -7,7 +7,7 @@
 #include "Game6.h"
 #include "Game7.h"
 //#include "Pyramid_TicTacToe.h"
-//#include "Word_TicTacToe.h"
+#include "Word_TicTacToe.h"
 
 void RunNumXO() {
     string playerXName, player2Name, choice;
@@ -400,6 +400,76 @@ void RunGame7() {
 
 
 }
+
+
+
+
+
+void RunWordXo() {
+    string choice;
+    Player<char>* players[2];
+    Word_TicTacToe_Board<char>* B = new Word_TicTacToe_Board<char>();
+    string playerXName, player2Name;
+
+    cout << "Welcome to FCAI X-O Game. :)\n";
+
+    // Set up player 1
+    cout << "Enter Player X name: ";
+    cin >> playerXName;
+    while (true) {
+        cout << "Choose Player X type:\n";
+        cout << "1. Human\n";
+        cout << "2. Random Computer\n";
+        cin >> choice;
+
+        if (choice == "1") {
+            players[0] = new W_TTT_Player<char>(playerXName, 'X');
+            break;
+        }
+        if (choice == "2") {
+            players[0] = new W_TTT_Random_Player<char>('X');
+            break;
+        }
+        else
+            cout << "Invalid choice for Player 2. Please enter '1' or '2'.\n";
+    }
+
+
+    // Set up player 2
+    cout << "Enter Player 2 name: ";
+    cin >> player2Name;
+    while (true) {
+        cout << "Choose Player 2 type:\n";
+        cout << "1. Human\n";
+        cout << "2. Random Computer\n";
+        cin >> choice;
+        
+        if (choice == "1") {
+            players[1] = new W_TTT_Player<char>(player2Name, 'O');
+            break;
+        }
+        else if (choice == "2") {
+            players[1] = new W_TTT_Random_Player<char>('O');
+            break;
+            }
+         else
+             cout << "Invalid choice for Player 2. Please enter '1' or '2'.\n";
+    }
+    // Create the game manager and run the game
+    GameManager<char> x_o_game(B, players);
+    x_o_game.run();
+
+    // Clean up
+    delete B;
+    for (int i = 0; i < 2; ++i) {
+        delete players[i];
+    }
+
+
+}
+
+
+
 
 
 
