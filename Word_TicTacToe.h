@@ -6,9 +6,6 @@
 #include <map>
 #include <fstream>
 
-class Word_Tic_Tac_Toe;
-
-
 /*--------------------------------Word_TicTacToe_Board Class--------------------------------*/
 template<typename T>
 class Word_TicTacToe_Board : public Board<T>{
@@ -181,8 +178,6 @@ public:
     T newRandomLetter;
     W_TTT_Random_Player(const T& letter);
     void getmove(int& x, int& y) override;
-
-    friend class Word_Tic_Tac_Toe;
 };
 
 // Random Player Constructor
@@ -210,8 +205,6 @@ public:
     T newLetter;
     W_TTT_Player(string n, T letter);
     void getmove(int& x, int& y) override;
-
-    friend class Word_Tic_Tac_Toe;
 };
 
 
