@@ -33,7 +33,8 @@ void displayMainMenu() {
     cout << "4) Game 3\n";
     cout << "5) Game 6\n";
     cout << "6) Game 7\n";
-    cout << "7) Exit\n";
+    cout << "7) Word Tic Tac Toe\n";
+    cout << "8) Exit\n";
     cout << "=====================\n";
     cout << "Enter your choice: ";
 }
@@ -63,6 +64,9 @@ int main() {
             gameLoop(RunGame7);
         }
         else if (choice == "7") {
+            gameLoop(RunWordXo);
+        }
+        else if (choice == "8") {
             cout << "Exiting the program. Goodbye!\n";
             break;
         }
