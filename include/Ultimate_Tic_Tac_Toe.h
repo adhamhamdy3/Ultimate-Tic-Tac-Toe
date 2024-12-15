@@ -9,7 +9,7 @@ class Local_Board : public Board<T> {
 private:
     void initBoard();
 public:
-    static constexpr T DEFAULT_EMPTY_VALUE = T();
+    static constexpr T EMPTY = T();
     T winner;
     Local_Board();
     ~Local_Board();
@@ -37,13 +37,13 @@ bool Local_Board<T>::is_draw() {
 template<typename T>
 bool Local_Board<T>::is_win() {
     for (int i = 0; i < this->rows; i++) {
-        if (this->board[i][0] != Local_Board<T>::DEFAULT_EMPTY_VALUE &&
+        if (this->board[i][0] != Local_Board<T>::EMPTY &&
             this->board[i][0] == this->board[i][1] &&
             this->board[i][1] == this->board[i][2]) {
             this->winner = this->board[i][0];
             return true;
         }
-        if (this->board[0][i] != Local_Board<T>::DEFAULT_EMPTY_VALUE &&
+        if (this->board[0][i] != Local_Board<T>::EMPTY &&
             this->board[0][i] == this->board[1][i] &&
             this->board[1][i] == this->board[2][i]) {
             this->winner = this->board[0][i];
@@ -51,7 +51,7 @@ bool Local_Board<T>::is_win() {
         }
     }
 
-    if (this->board[1][1] != Local_Board<T>::DEFAULT_EMPTY_VALUE) {
+    if (this->board[1][1] != Local_Board<T>::EMPTY) {
         if (this->board[0][0] == this->board[1][1] &&
             this->board[1][1] == this->board[2][2]) {
             this->winner = this->board[1][1];
@@ -83,10 +83,10 @@ void Local_Board<T>::display_board() {
 
 template<typename T>
 bool Local_Board<T>::update_board(const int &x, const int &y, const T &symbol) {
-    if(!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == Local_Board<T>::DEFAULT_EMPTY_VALUE || symbol == Local_Board<T>::DEFAULT_EMPTY_VALUE)){
-        if (symbol == Local_Board<T>::DEFAULT_EMPTY_VALUE){
+    if(!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == Local_Board<T>::EMPTY || symbol == Local_Board<T>::EMPTY)){
+        if (symbol == Local_Board<T>::EMPTY){
             this->n_moves--;
-            this->board[x][y] = Local_Board<T>::DEFAULT_EMPTY_VALUE;
+            this->board[x][y] = Local_Board<T>::EMPTY;
         }
         else {
             this->n_moves++;
@@ -119,13 +119,13 @@ template<typename T>
 void Local_Board<T>::initBoard() {
     this->rows = this->columns = 3;
     this->n_moves = 0;
-    this->winner = Local_Board<T>::DEFAULT_EMPTY_VALUE;
+    this->winner = Local_Board<T>::EMPTY;
 
     this->board = new T*[this->rows];
     for (int i = 0; i < this->rows; ++i) {
         this->board[i] = new T[this->columns];
         for (int j = 0; j < this->columns; ++j) {
-            this->board[i][j] = Local_Board<T>::DEFAULT_EMPTY_VALUE;
+            this->board[i][j] = Local_Board<T>::EMPTY;
         }
     }
 }
@@ -188,7 +188,7 @@ bool Ultimate_Board<T>::is_draw() {
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if(this->localWinners[i][j] == Local_Board<T>::DEFAULT_EMPTY_VALUE){
+            if(this->localWinners[i][j] == Local_Board<T>::EMPTY){
                 draw = false;
             }
         }
@@ -205,16 +205,16 @@ bool Ultimate_Board<T>::game_is_over() {
 template<typename T>
 bool Ultimate_Board<T>::is_win() {
     for (int i = 0; i < this->rows; i++) {
-        if ((this->localWinners[i][0] == this->localWinners[i][1] && this->localWinners[i][1] == this->localWinners[i][2] && this->localWinners[i][0] != Local_Board<T>::DEFAULT_EMPTY_VALUE) ||
-            (this->localWinners[0][i] == this->localWinners[1][i] && this->localWinners[1][i] == this->localWinners[2][i] && this->localWinners[0][i] != Local_Board<T>::DEFAULT_EMPTY_VALUE)) {
+        if ((this->localWinners[i][0] == this->localWinners[i][1] && this->localWinners[i][1] == this->localWinners[i][2] && this->localWinners[i][0] != Local_Board<T>::EMPTY) ||
+            (this->localWinners[0][i] == this->localWinners[1][i] && this->localWinners[1][i] == this->localWinners[2][i] && this->localWinners[0][i] != Local_Board<T>::EMPTY)) {
 
             this->ultimateWinner = this->localWinners[i][0];
             return true;
         }
     }
 
-    if ((this->localWinners[0][0] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][2] && this->localWinners[0][0] != Local_Board<T>::DEFAULT_EMPTY_VALUE) ||
-        (this->localWinners[0][2] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][0] && this->localWinners[0][2] != Local_Board<T>::DEFAULT_EMPTY_VALUE)) {
+    if ((this->localWinners[0][0] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][2] && this->localWinners[0][0] != Local_Board<T>::EMPTY) ||
+        (this->localWinners[0][2] == this->localWinners[1][1] && this->localWinners[1][1] == this->localWinners[2][0] && this->localWinners[0][2] != Local_Board<T>::EMPTY)) {
 
         this->ultimateWinner = this->localWinners[1][1];
         return true;
@@ -267,12 +267,12 @@ void Ultimate_Board<T>::initLocalBoards(){
     this->currentBoard_X = this->currentBoard_Y = -1;
     this->board = nullptr;
 
-    this->ultimateWinner = Local_Board<T>::DEFAULT_EMPTY_VALUE;
+    this->ultimateWinner = Local_Board<T>::EMPTY;
 
     for (int i = 0; i < this->rows; ++i) {
         for (int j = 0; j < this->columns; ++j) {
             this->boards[i][j] = new Local_Board<T>();
-            this->localWinners[i][j] = Local_Board<T>::DEFAULT_EMPTY_VALUE;
+            this->localWinners[i][j] = Local_Board<T>::EMPTY;
         }
     }
     this->n_moves = 0;

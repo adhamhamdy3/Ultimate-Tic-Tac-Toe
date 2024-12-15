@@ -314,7 +314,7 @@ void Ultimate_TTT_UI::switchBoards(){
     if (ultimateBoard->canPickBoard) {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                turnON_OFF(i, j, (ultimateBoard->localWinners[i][j] == Local_Board<char>::DEFAULT_EMPTY_VALUE));
+                turnON_OFF(i, j, (ultimateBoard->localWinners[i][j] == Local_Board<char>::EMPTY));
             }
         }
     } else {
@@ -345,7 +345,7 @@ void Ultimate_TTT_UI::operate(QTableWidgetItem* item, const int& row, const int&
         pIndx = 1;
     }
 
-    if(ultimateBoard->boards[recentBoard_X][recentBoard_Y]->winner != Local_Board<char>::DEFAULT_EMPTY_VALUE){
+    if(ultimateBoard->boards[recentBoard_X][recentBoard_Y]->winner != Local_Board<char>::EMPTY){
         updateGridWinner(board_X, board_Y, pIndx);
     }
 
@@ -511,7 +511,7 @@ void Ultimate_TTT_UI::executeNonHumanPlayerTurn(){
 
     updateCell(item, 1, board_X, board_Y, x, y);
 
-    if(ultimateBoard->boards[board_X][board_Y]->winner != Local_Board<char>::DEFAULT_EMPTY_VALUE){
+    if(ultimateBoard->boards[board_X][board_Y]->winner != Local_Board<char>::EMPTY){
         updateGridWinner(board_X, board_Y, 1);
     }
 
