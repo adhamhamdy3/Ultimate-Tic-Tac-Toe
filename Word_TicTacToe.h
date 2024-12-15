@@ -6,6 +6,7 @@
 #include <map>
 #include <fstream>
 
+
 /*--------------------------------Word_TicTacToe_Board Class--------------------------------*/
 template<typename T>
 class Word_TicTacToe_Board : public Board<T>{
@@ -16,7 +17,7 @@ public:
     static constexpr T EMPTY = T();
     Word_TicTacToe_Board();
     ~Word_TicTacToe_Board();
-    bool update_board(const int& x, const int& y, const T& letter) override;
+    bool update_board(int x, int y, T letter) override;
     void display_board() override;
     bool is_win() override;
     bool is_draw() override;
@@ -43,7 +44,7 @@ Word_TicTacToe_Board<T>::~Word_TicTacToe_Board() {
 
 // update_board Function
 template<typename T>
-bool Word_TicTacToe_Board<T>::update_board(const int& x, const int& y, const T& letter) {
+bool Word_TicTacToe_Board<T>::update_board(int x, int y, T letter) {
     if(!(x < 0 || x >= this->rows || y < 0 || y >= this->columns) && (this->board[x][y] == Word_TicTacToe_Board<T>::EMPTY || letter == Word_TicTacToe_Board<T>::EMPTY)){
         if (letter == Word_TicTacToe_Board<T>::EMPTY){
             this->n_moves--;
@@ -176,13 +177,13 @@ template<typename T>
 class W_TTT_Random_Player : public RandomPlayer<T>{
 public:
     T newRandomLetter;
-    W_TTT_Random_Player(const T& letter);
+    W_TTT_Random_Player(T letter);
     void getmove(int& x, int& y) override;
 };
 
 // Random Player Constructor
 template<typename T>
-W_TTT_Random_Player<T>::W_TTT_Random_Player(const T &letter) : RandomPlayer<T>(letter) {
+W_TTT_Random_Player<T>::W_TTT_Random_Player(T letter) : RandomPlayer<T>(letter) {
     this->dimension = 3;
     this->name = "Random Computer Player";
     srand(static_cast<unsigned int>(time(0)));
