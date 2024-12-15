@@ -11,12 +11,13 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setStyleSheet("background-color: #263238; color: #ECEFF1");
+    // this->setStyleSheet("background-color: #263238; color: #ECEFF1");
 
     player1 = true;
     player2 = false;
 
     gameOver = false;
+    borderOn = false;
 
     nonHumanPlayerMode = false;
 
@@ -25,7 +26,6 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 
     getPlayersInfo();
 
-    // Initialize UI_labels
     UI_labels[0][0] = ui->_0_0_Label;
     UI_labels[0][1] = ui->_0_1_Label;
     UI_labels[0][2] = ui->_0_2_Label;
@@ -36,7 +36,6 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     UI_labels[2][1] = ui->_2_1_Label;
     UI_labels[2][2] = ui->_2_2_Label;
 
-    // Initialize UI_grids
     UI_grids[0][0] = ui->_0_0_Grid;
     UI_grids[0][1] = ui->_0_1_Grid;
     UI_grids[0][2] = ui->_0_2_Grid;
@@ -47,12 +46,11 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     UI_grids[2][1] = ui->_2_1_Grid;
     UI_grids[2][2] = ui->_2_2_Grid;
 
-
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-            UI_grids[row][col]->setStyleSheet("background-color: #37474F; "
-                                              "gridline-color: #546E7A; "
-                                              "border: 1px solid #546E7A;");
+            // UI_grids[row][col]->setStyleSheet("border: 1px solid #546E7A;");
+            UI_grids[row][col]->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            UI_grids[row][col]->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
             UI_labels[row][col]->setAttribute(Qt::WA_TransparentForMouseEvents);
             UI_labels[row][col]->lower();
@@ -60,7 +58,8 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 
     }
 
-    //ULTIMATE_TTT_GAME = new GameManager<char>(ultimateBoard, players);
+    blinkTimer = new QTimer(this);
+    connect(blinkTimer, &QTimer::timeout, this, &Ultimate_TTT_UI::toggleBlinkingBorder);
 
     updateNoOfMovesLabel();
 }
@@ -72,8 +71,6 @@ Ultimate_TTT_UI::~Ultimate_TTT_UI()
     if (players[0]) delete players[0];
     if (players[1]) delete players[1];
     if (ultimateBoard) delete ultimateBoard;
-
-    //delete ULTIMATE_TTT_GAME;
 }
 
 void Ultimate_TTT_UI::getPlayersInfo(){
@@ -170,6 +167,16 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
             }
         }
     }
+
+    borderOn = true;
+    toggleBlinkingBorder();
+    blinkTimer->start(1100);
+}
+
+void Ultimate_TTT_UI::toggleBlinkingBorder() {
+    QString borderStyle = borderOn ? "2px solid red" : "none";
+    UI_grids[ultimateBoard->currentBoard_X][ultimateBoard->currentBoard_Y]->setStyleSheet(QString("border: %1;").arg(borderStyle));
+    borderOn = !borderOn;
 }
 
 void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex, const int& board_X, const int& board_Y, const int& row, const int& column){

@@ -42,6 +42,8 @@ private slots:
 
     void on__2_2_Grid_cellDoubleClicked(int row, int column);
 
+    void toggleBlinkingBorder();
+
 private:
     Ui::Ultimate_TTT_UI *ui;
     Player<char>* players[2];
@@ -52,6 +54,8 @@ private:
     QLabel* UI_labels[3][3];
     QTableWidget* UI_grids[3][3];
 
+    QTimer *blinkTimer;           // Timer for the blinking effect
+
     bool player1, player2;
 
     bool gameOver;
@@ -59,6 +63,8 @@ private:
     bool nonHumanPlayerMode;
 
     bool firstTime;
+
+    bool borderOn;
 
     void getPlayersInfo();
 
