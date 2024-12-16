@@ -27,51 +27,62 @@ void gameLoop(void (*runGame)()) {
 
 void displayMainMenu() {
     cout << "\n===== Main Menu =====\n";
-    cout << "1) Numerical Xo Game\n";
-    cout << "2) Connect_4 Game\n";
-    cout << "3) Ultimate Xo\n";
-    cout << "4) Game 3\n";
-    cout << "5) Game 6\n";
-    cout << "6) Game 7\n";
-    cout << "7) Word Tic Tac Toe\n";
-    cout << "8) Exit\n";
+    cout<< "1-  Pyramic Tic-Tac-Toe\n";
+    cout <<"2-  Four-in-a-row\n";
+    cout <<"3-  5 x 5 Tic Tac Toe\n";
+    cout <<"4-  Word Tic-tac-toe\n";
+    cout <<"5-  Numerical Tic-Tac-Toe\n";
+    cout <<"6-  Misere Tic Tac Toe\n";
+    cout <<"7-  4 x 4 Tic-Tac-Toe\n";
+    cout << "8- Ultimate Tic Tac Toe\n";
+    cout << "9) Exit\n";
     cout << "=====================\n";
     cout << "Enter your choice: ";
 }
 
 int main() {
+    cout<<"das";
     while (true) {
         string choice;
         displayMainMenu();
         cin >> choice;
 
         if (choice == "1") {
-            gameLoop(RunNumXO);
+            gameLoop(RunPyramids);
+           
         }
         else if (choice == "2") {
             gameLoop(RunConnect4);
         }
         else if (choice == "3") {
-            gameLoop(RunUltimate);
+            gameLoop(RunGame3);
+            
         }
         else if (choice == "4") {
-            gameLoop(RunGame3);
+            gameLoop(RunWordXo);
+            
         }
         else if (choice == "5") {
-            gameLoop(RunGame6);
+           
+             gameLoop(RunNumXO);
         }
         else if (choice == "6") {
-            gameLoop(RunGame7);
+             gameLoop(RunGame6);
+           
         }
         else if (choice == "7") {
-            gameLoop(RunWordXo);
+             gameLoop(RunGame7);
+            
         }
-        else if (choice == "8") {
+        else if(choice=="8"){
+            gameLoop(RunUltimate);
+        }
+        else if (choice == "9") {
             cout << "Exiting the program. Goodbye!\n";
             break;
         }
         else {
-            cout << "Invalid choice. Please select a valid option (1-7).\n";
+            cout << "Invalid choice. Please select a valid option (1-9).\n";
         }
     }
 
