@@ -70,6 +70,8 @@ private:
 
     QChar getSymbol(const QString& defaultSymbol);
 
+    QString originalStyle;
+
     void keepCurrentBoard();
 
     void turnON_OFF(const int&, const int&, bool);

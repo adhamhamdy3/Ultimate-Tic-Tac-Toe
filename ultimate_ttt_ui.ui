@@ -289,14 +289,17 @@
          <attribute name="horizontalHeaderVisible">
           <bool>false</bool>
          </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>39</number>
+         </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -457,13 +460,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -624,13 +627,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -795,13 +798,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -962,13 +965,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -1138,13 +1141,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -1309,13 +1312,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -1476,13 +1479,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -1643,13 +1646,13 @@
           <bool>false</bool>
          </attribute>
          <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
-          <number>82</number>
+          <number>83</number>
          </attribute>
          <row>
           <property name="text">
@@ -2100,16 +2103,6 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_8">
-       <item>
-        <widget class="Line" name="line_18">
-         <property name="styleSheet">
-          <string notr="true">background-color: #546E7A;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="Line" name="line_16">
          <property name="styleSheet">

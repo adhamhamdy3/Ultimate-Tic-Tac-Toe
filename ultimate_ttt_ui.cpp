@@ -11,13 +11,13 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // this->setStyleSheet("background-color: #263238; color: #ECEFF1");
+    //this->setStyleSheet("background-color: #263238; color: #ECEFF1;");
 
     player1 = true;
     player2 = false;
 
     gameOver = false;
-    borderOn = false;
+    borderOn = true;
 
     nonHumanPlayerMode = false;
 
@@ -48,7 +48,8 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-            // UI_grids[row][col]->setStyleSheet("border: 1px solid #546E7A;");
+            // UI_grids[row][col]->setStyleSheet("border: 1px solid #546E7A;"
+            //                                   "gridline-color: #546E7A;");
             UI_grids[row][col]->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
             UI_grids[row][col]->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -61,6 +62,9 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
     blinkTimer = new QTimer(this);
     connect(blinkTimer, &QTimer::timeout, this, &Ultimate_TTT_UI::toggleBlinkingBorder);
 
+    originalStyle = UI_grids[0][0]->styleSheet();
+
+    turnON_ALL();
     updateNoOfMovesLabel();
 }
 
@@ -87,7 +91,6 @@ void Ultimate_TTT_UI::getPlayersInfo(){
     QMessageBox msgBox(this);
 
     msgBox.setText("Choose your opponent type:");
-    // QPushButton* aiButton = msgBox.addButton("AI Player", QMessageBox::ActionRole);
     QPushButton* randomButton = msgBox.addButton("Random Computer Player", QMessageBox::ActionRole);
     QPushButton* realButton = msgBox.addButton("Real Player", QMessageBox::ActionRole);
 
@@ -95,12 +98,7 @@ void Ultimate_TTT_UI::getPlayersInfo(){
 
     QChar player2Symbol;
 
-    /*if (msgBox.clickedButton() == aiButton) {
-        player2Symbol = getSymbol("O");
-        players[1] = new P_TTT_AI_Player<char>(player2Symbol.toLatin1());
-        players[1]->setBoard(Board);
-        nonHumanPlayerMode = true;
-    } else*/ if (msgBox.clickedButton() == randomButton) {
+   if (msgBox.clickedButton() == randomButton) {
         player2Symbol = getSymbol("O");
         players[1] = new Ultimate_TTT_Random_Player<char>(player2Symbol.toLatin1(), ultimateBoard);
         nonHumanPlayerMode = true;
@@ -134,7 +132,12 @@ QChar Ultimate_TTT_UI::getSymbol(const QString& defaultSymbol){
     return playerSymbol;
 }
 
-void Ultimate_TTT_UI::turnON_OFF(const int& i, const int& j, bool state){
+void Ultimate_TTT_UI::turnON_OFF(const int& i, const int& j, bool state) {
+    QString overlayBorderStyle = state ? "border: 2px solid red;" : "";
+
+    QString newStyle = originalStyle + overlayBorderStyle;
+    UI_grids[i][j]->setStyleSheet(newStyle);
+
     UI_grids[i][j]->setEnabled(state);
 }
 
@@ -482,7 +485,6 @@ void Ultimate_TTT_UI::updateGridWinner(int gridX, int gridY, int playerIndex) {
                             "QLabel { "
                             "    background-color: %1; "
                             "    color: white; "
-                            "    border-radius: 10px; "
                             "} "
                             "QLabel:hover { "
                             "    background-color: rgba(0, 0, 0, 0); "
