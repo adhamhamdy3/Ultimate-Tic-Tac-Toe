@@ -6,7 +6,8 @@
 #include "Game3.h"
 #include "Game6.h"
 #include "Game7.h"
-//#include "Pyramid_TicTacToe.h"
+#include "Pyramid_TicTacToe.h"
+#include "P_TTT_AI_Player.h"
 #include "Word_TicTacToe.h"
 
 void RunNumXO() {
@@ -468,6 +469,84 @@ void RunWordXo() {
 
 }
 
+
+
+void RunPyramids(){
+
+    string choice;
+    Player<char>* players[2];
+    Pyramid_TicTacToe_Board<char>* B = new Pyramid_TicTacToe_Board<char>();
+    string playerXName, player2Name;
+
+    cout << "Welcome to FCAI X-O Game. :)\n";
+
+    // Set up player 1
+    cout << "Enter Player X name: ";
+    cin >> playerXName;
+    cout << "Choose Player X type:\n";
+    cout << "1. Human\n";
+    cout << "2. Random Computer\n";
+    cout << "3. AI Player\n";
+    cin >> choice;
+    while(true){
+        if (choice == "1") {
+        players[0] = new P_TTT_Player<char>(playerXName, 'X');
+            break;
+        }
+        else if(choice=="2"){
+            players[0] = new P_TTT_Random_Player<char>('X');
+            break;
+        }
+        else if(choice=="3"){
+            players[0] = new P_TTT_AI_Player<char>('X');
+            players[0]->setBoard(B);
+            break;
+        }
+        else
+            cout << "Invalid choice for Player 2. Please enter '1' or '2'.\n";
+    }
+          
+    
+
+    // Set up player 2
+    cout << "Enter Player 2 name: ";
+    cin >> player2Name;
+    cout << "Choose Player 2 type:\n";
+    cout << "1. Human\n";
+    cout << "2. Random Computer\n";
+    cout << "3. AI Player\n";
+    cin >> choice;
+
+    while(true){
+        if (choice == "1") {
+        players[1] = new P_TTT_Player<char>(playerXName, 'X');
+            break;
+        }
+        else if(choice=="2"){
+            players[1] = new P_TTT_Random_Player<char>('X');
+            break;
+        }
+        else if(choice=="3"){
+            players[1] = new P_TTT_AI_Player<char>('X');
+            players[1]->setBoard(B);
+            break;
+        }
+        else
+            cout << "Invalid choice for Player 2. Please enter '1' or '2'.\n";
+    }
+
+    // Create the game manager and run the game
+    GameManager<char> x_o_game(B, players);
+    x_o_game.run();
+
+    // Clean up
+    delete B;
+    for (int i = 0; i < 2; ++i) {
+        delete players[i];
+    }
+
+
+}
 
 
 
