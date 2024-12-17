@@ -13,18 +13,14 @@ Ultimate Tic-Tac-Toe is an advanced version of the classic Tic-Tac-Toe game. It 
 5. **Winning a Grid**: A player wins a smaller grid by completing 3 consecutive symbols (horizontally, vertically, or diagonally).
 6. **Winning the Game**: The player who wins 3 smaller grids in a row (horizontally, vertically, or diagonally) wins the entire game.
 
-If a grid is already won or full, your opponent can play in any available grid.
----
+**If a grid is already won or full, your opponent can play in any available grid.**
 
 ## Screenshot
 ![Ultimate Tic-Tac-Toe Screenshot](https://github.com/user-attachments/assets/7c37fd48-3e05-45c8-82b3-f01ba58c094f)
 ---
 
 ## How to Download
-Download the **latest version** of Ultimate Tic-Tac-Toe from the GitHub Releases page:
-
-[Download Lastest Version](https://github.com/adhamhamdy3/Ultimate-Tic-Tac-Toe/releases/)
----
+Download the **latest version** of Ultimate Tic-Tac-Toe from the [GitHub Releases page](https://github.com/adhamhamdy3/Ultimate-Tic-Tac-Toe/releases/).
 
 ## Creator
 - **Adham Hamdy**
