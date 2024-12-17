@@ -11,7 +11,7 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setStyleSheet("background-color: #263238; color: #ECEFF1;");
+    // this->setStyleSheet("background-color: #263238; color: #ECEFF1;");
 
     player1 = true;
     player2 = false;
@@ -48,12 +48,12 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-            UI_grids[row][col]->setStyleSheet("QTableWidget::item {"
-                                              "border: 1px solid #546E7A;"
-                                              "}"
-                                              "border: 1px solid #546E7A;"
-                                              "background-color: #37474F;"
-                                              "gridline-color: #546E7A;");
+            // UI_grids[row][col]->setStyleSheet("QTableWidget::item {"
+            //                                   "border: 1px solid #546E7A;"
+            //                                   "}"
+            //                                   "border: 1px solid #546E7A;"
+            //                                   "background-color: #37474F;"
+            //                                   "gridline-color: #546E7A;");
             UI_grids[row][col]->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
             UI_grids[row][col]->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -197,18 +197,18 @@ void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex,
     item->setForeground(Qt::white);
     item->setFlags(Qt::NoItemFlags);
 
-    // QWidget* cellWidget = UI_grids[board_X][board_Y]->cellWidget(row, column);
+    QWidget* cellWidget = UI_grids[board_X][board_Y]->cellWidget(row, column);
 
-    // if (!cellWidget) {
-    //     cellWidget = new QWidget();
-    //     UI_grids[board_X][board_Y]->setCellWidget(row, column, cellWidget);
-    // }
+    if (!cellWidget) {
+        cellWidget = new QWidget();
+        UI_grids[board_X][board_Y]->setCellWidget(row, column, cellWidget);
+    }
 
-    // cellWidget->setStyleSheet("border: 3px solid yellow;");
+    cellWidget->setStyleSheet("border: 3px solid yellow;");
 
-    // QTimer::singleShot(500, [cellWidget]() {
-    //     cellWidget->setStyleSheet("");
-    // });
+    QTimer::singleShot(500, [cellWidget]() {
+        cellWidget->setStyleSheet("");
+    });
 }
 
 void Ultimate_TTT_UI::initGrids(){
