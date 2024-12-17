@@ -6,6 +6,7 @@
 #include "Ultimate_Tic_Tac_Toe.h"
 #include <QTableWidgetItem>
 #include <QLabel>
+#include <QMap>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,8 +31,6 @@ private slots:
 
     void on__1_0_Grid_cellDoubleClicked(int row, int column);
 
-    void on__1_1_Grid_cellActivated(int row, int column);
-
     void on__1_1_Grid_cellDoubleClicked(int row, int column);
 
     void on__1_2_Grid_cellDoubleClicked(int row, int column);
@@ -53,8 +52,9 @@ private:
 private:
     QLabel* UI_labels[3][3];
     QTableWidget* UI_grids[3][3];
+    QMap<QTableWidgetItem*, QString> cellOriginalStyles;
 
-    QTimer *blinkTimer;           // Timer for the blinking effect
+    QTimer *blinkTimer;
 
     bool player1, player2;
 
