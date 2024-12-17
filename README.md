@@ -3,6 +3,8 @@
 ## Description
 Ultimate Tic-Tac-Toe is an advanced version of the classic Tic-Tac-Toe game. It introduces an exciting twist by combining **nine smaller Tic-Tac-Toe grids** into one large board. Each move you make determines where your opponent plays next, adding layers of strategy and challenge.
 
+---
+
 ### How to Play
 1. The game board consists of **9 smaller grids** (3x3 layout).
 2. Each smaller grid functions as a classic Tic-Tac-Toe board.
@@ -15,12 +17,17 @@ Ultimate Tic-Tac-Toe is an advanced version of the classic Tic-Tac-Toe game. It 
 
 **If a grid is already won or full, your opponent can play in any available grid.**
 
+---
+
 ## Screenshot
 ![Ultimate Tic-Tac-Toe Screenshot](https://github.com/user-attachments/assets/7c37fd48-3e05-45c8-82b3-f01ba58c094f)
+
 ---
 
 ## How to Download
 Download the **latest version** of Ultimate Tic-Tac-Toe from the [GitHub Releases page](https://github.com/adhamhamdy3/Ultimate-Tic-Tac-Toe/releases/).
+
+---
 
 ## Creator
 - **Adham Hamdy**
