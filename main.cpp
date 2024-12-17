@@ -27,7 +27,7 @@ void gameLoop(void (*runGame)()) {
 
 void displayMainMenu() {
     cout << "\n===== Main Menu =====\n";
-    cout<< "1-  Pyramic Tic-Tac-Toe\n";
+    cout<< "1-  Pyramid Tic-Tac-Toe\n";
     cout <<"2-  Four-in-a-row\n";
     cout <<"3-  5 x 5 Tic Tac Toe\n";
     cout <<"4-  Word Tic-tac-toe\n";
@@ -41,7 +41,6 @@ void displayMainMenu() {
 }
 
 int main() {
-    cout<<"das";
     while (true) {
         string choice;
         displayMainMenu();
