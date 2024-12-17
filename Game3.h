@@ -13,6 +13,7 @@ private:
     int CountX , CountO ;
 public:
     X_O_Board_3();
+    ~X_O_Board_3();
     bool update_board(int x , int y , T mark)override;
     void display_board()override;
     bool is_win()override;
@@ -67,6 +68,14 @@ template<typename T>
     }
     this->n_moves = 0;
 
+}
+template<typename T>
+X_O_Board_3<T>::~X_O_Board_3() {
+    for (int i = 0; i < this->rows; i++) {
+        delete[] this->board[i];
+    }
+    delete[] this->board;
+    this->board = nullptr;
 }
 template <typename T>
 bool  X_O_Board_3<T>::update_board(int x, int y, T mark) {
