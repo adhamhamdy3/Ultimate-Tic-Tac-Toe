@@ -10,6 +10,7 @@ template <typename T>
 class X_O_Board_6:public Board<T> {
 public:
     X_O_Board_6 ();
+    ~X_O_Board_6 ();
     bool update_board (int x , int y , T symbol);
     void display_board () ;
     bool is_win() ;
@@ -147,7 +148,14 @@ template <typename T>
     this->name = name;
     srand(static_cast<unsigned int>(time(0)));
 }
-
+template <typename T>
+X_O_Board_6<T>::~X_O_Board_6() {
+    for (int i = 0; i < this->rows; i++) {
+        delete[] this->board[i];
+    }
+    delete[] this->board;
+    this->board = nullptr;
+}
 template <typename T>
 void X_O_RandomPlayer_6<T>::getmove(int& x, int& y) {
     if (there_was_a_winner) {
