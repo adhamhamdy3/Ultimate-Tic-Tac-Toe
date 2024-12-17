@@ -10,6 +10,7 @@ template <typename T>
 class X_O_Board_7:public Board<T> {
 public:
     X_O_Board_7 ();
+    ~X_O_Board_7 ();
     bool update_board (int x , int y , T symbol);
     void display_board () ;
     bool is_win() ;
@@ -61,7 +62,14 @@ X_O_Board_7<T>::X_O_Board_7() {
 
     this->n_moves = 0;
 }
-
+template <typename T>
+X_O_Board_7<T>::~X_O_Board_7() {
+    for (int i = 0; i < this->rows; i++) {
+        delete[] this->board[i];
+    }
+    delete[] this->board;
+    this->board = nullptr;
+}
 template <typename T>
 bool X_O_Board_7<T>::update_board(int x, int y, T mark) {
     // Only update if move is valid
