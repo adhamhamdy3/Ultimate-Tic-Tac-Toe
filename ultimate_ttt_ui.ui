@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1354</width>
+    <width>1174</width>
     <height>850</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1354</width>
+    <width>1174</width>
     <height>850</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1354</width>
+    <width>1174</width>
     <height>850</height>
    </size>
   </property>
@@ -1803,15 +1803,15 @@
     <property name="geometry">
      <rect>
       <x>820</x>
-      <y>20</y>
-      <width>525</width>
+      <y>40</y>
+      <width>351</width>
       <height>72</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>outrun future</family>
-      <pointsize>24</pointsize>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="text">
@@ -1826,7 +1826,7 @@
      <rect>
       <x>820</x>
       <y>140</y>
-      <width>531</width>
+      <width>351</width>
       <height>661</height>
      </rect>
     </property>
@@ -2124,7 +2124,7 @@
          <property name="font">
           <font>
            <family>outrun future</family>
-           <pointsize>12</pointsize>
+           <pointsize>8</pointsize>
           </font>
          </property>
          <property name="text">
@@ -2167,8 +2167,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1354</width>
-     <height>22</height>
+     <width>1174</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

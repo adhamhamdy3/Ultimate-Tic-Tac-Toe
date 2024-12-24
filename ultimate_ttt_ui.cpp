@@ -311,14 +311,14 @@ void Ultimate_TTT_UI::updateState(){
 
     if(ultimateBoard->canPickBoard){
         ui->msgLabel->setText("You can choose any Tic Tac Toe grid you want to pick your cell.");
-        ui->msgLabel->setFont(QFont("Outrun future", 10, QFont::Bold));
+        ui->msgLabel->setFont(QFont("Outrun future", 8, QFont::Bold));
     }
 
     else{
         QString X = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_X));
         QString Y = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_Y));
         ui->msgLabel->setText("You can only pick from (" + X + ", " + Y + ") Tic Tac Toe grid.");
-        ui->msgLabel->setFont(QFont("Outrun future", 12, QFont::Bold));
+        ui->msgLabel->setFont(QFont("Outrun future", 8, QFont::Bold));
 
     }
 }
