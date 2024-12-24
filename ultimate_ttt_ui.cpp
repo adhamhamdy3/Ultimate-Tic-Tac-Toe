@@ -11,7 +11,7 @@ Ultimate_TTT_UI::Ultimate_TTT_UI(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // this->setStyleSheet("background-color: #263238; color: #ECEFF1;");
+    this->setStyleSheet("background-color: #263238; color: #ECEFF1;");
 
     player1 = true;
     player2 = false;
@@ -175,9 +175,9 @@ void Ultimate_TTT_UI::keepCurrentBoard(){
         }
     }
 
-    borderOn = true;
-    toggleBlinkingBorder();
-    blinkTimer->start(1100);
+    // borderOn = true;
+    // toggleBlinkingBorder();
+    // blinkTimer->start(1100);
 }
 
 void Ultimate_TTT_UI::toggleBlinkingBorder() {
@@ -197,18 +197,18 @@ void Ultimate_TTT_UI::updateCell(QTableWidgetItem* item, const int& playerIndex,
     item->setForeground(Qt::white);
     item->setFlags(Qt::NoItemFlags);
 
-    QWidget* cellWidget = UI_grids[board_X][board_Y]->cellWidget(row, column);
+    // QWidget* cellWidget = UI_grids[board_X][board_Y]->cellWidget(row, column);
 
-    if (!cellWidget) {
-        cellWidget = new QWidget();
-        UI_grids[board_X][board_Y]->setCellWidget(row, column, cellWidget);
-    }
+    // if (!cellWidget) {
+    //     cellWidget = new QWidget();
+    //     UI_grids[board_X][board_Y]->setCellWidget(row, column, cellWidget);
+    // }
 
-    cellWidget->setStyleSheet("border: 3px solid yellow;");
+    // cellWidget->setStyleSheet("border: 3px solid yellow;");
 
-    QTimer::singleShot(500, [cellWidget]() {
-        cellWidget->setStyleSheet("");
-    });
+    // QTimer::singleShot(500, [cellWidget]() {
+    //     cellWidget->setStyleSheet("");
+    // });
 }
 
 void Ultimate_TTT_UI::initGrids(){
@@ -310,15 +310,15 @@ void Ultimate_TTT_UI::updateState(){
     }
 
     if(ultimateBoard->canPickBoard){
-        ui->msgLabel->setText("You are able to choose any Tic Tac Toe grid to pick your cell.");
+        ui->msgLabel->setText("You can choose any Tic Tac Toe grid you want to pick your cell.");
         ui->msgLabel->setFont(QFont("Outrun future", 10, QFont::Bold));
     }
 
     else{
         QString X = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_X));
         QString Y = QString::fromStdString(std::to_string(ultimateBoard->currentBoard_Y));
-        ui->msgLabel->setText("You can only choose (" + X + ", " + Y + ") Tic Tac Toe grid.");
-        ui->msgLabel->setFont(QFont("Outrun future", 14, QFont::Bold));
+        ui->msgLabel->setText("You can only pick from (" + X + ", " + Y + ") Tic Tac Toe grid.");
+        ui->msgLabel->setFont(QFont("Outrun future", 12, QFont::Bold));
 
     }
 }
